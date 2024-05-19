@@ -5,6 +5,7 @@ import diagnosis_db_img from "../../images/diagnosis_db_img.svg"
 
 import "./MainPage.scss";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/NavBar/NavBar";
     // 기본 사진 + 글자 + 검정라인 
     const LineDiv = styled.div`
         box-sizing: border-box;
@@ -57,6 +58,8 @@ function MainPage(){
                     <div>진단 내역 조회</div>
                 </LineDiv>
             </div>
+
+            <NavBar/>
 
         </div>
         
