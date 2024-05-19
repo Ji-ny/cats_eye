@@ -3,6 +3,7 @@ import Login from "./pages/Login/Login";
 import './App.scss';
 import { useEffect } from "react";
 import MainPage from "./pages/MainPage/MainPage";
+import ChatBotPage from "./pages/ChatBotPage/ChatBotPage";
 function App() {
 
       // ** =============뷰포트 높이 구하기 ===============** //
@@ -34,6 +35,7 @@ function App() {
         <Route path = "*" element= {<div> 404 페이지입니다.</div>}></Route>
         <Route path="/" element={<MainPage/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/chatbot" element={<ChatBotPage/>}/>
       </Routes>
     </div>
 
