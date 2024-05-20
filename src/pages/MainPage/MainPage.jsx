@@ -1,30 +1,12 @@
 import styled from "styled-components";
-import { TitlePink } from "../../styles/styles_custom";
+import { LineDiv, TitlePink } from "../../styles/styles_custom";
 import diagnosis_img from "../../images/diagnosis_img.svg" 
 import diagnosis_db_img from "../../images/diagnosis_db_img.svg" 
 
 import "./MainPage.scss";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
-    // 기본 사진 + 글자 + 검정라인 
-    const LineDiv = styled.div`
-        box-sizing: border-box;
-        padding: 10px;
-        border-radius: 15px;
-        background-color: #FFFFFF;
-        width: 334px;
-        height: 200px;
 
-        border: 0.5px solid black;
-        display: flex;
-        flex-direction: column; // 세로로 배치
-        justify-content: center;
-        align-items: center;
-
-        font-size: 0.8rem;
-        color: #4A4A4A;
-        cursor: pointer;
-    `;
 
 function MainPage(){
     // 네비게이트 함수 선언
@@ -37,7 +19,7 @@ function MainPage(){
 
     // 진단내역 조회로 이동 
     const goDiagnosisDB = () => {
-        navigate('/diagnosisDB'); 
+        navigate('/diagnosis_history'); 
     }
 
 
