@@ -1,0 +1,41 @@
+.pet_container{
+    box-sizing: border-box;
+    border-radius: 15px;
+    border: 1px solid black;
+
+    width: 100%;
+    min-width: 200px;
+    min-height: 110px;
+
+    column-gap: 10px;
+    
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+
+    place-items: center;
+    padding: 10px;
+
+    text-align: left;
+
+    // 이미지 부분 
+    >div:nth-child(1){
+        // background-color: #FFB0B0;
+        border-radius: 100%;
+        height: 80%;
+        box-sizing: border-box;
+        // 이미지 
+        >img{
+            width: 100%;
+            height: 100%;
+        }
+        // padding: 10px;
+    }
+
+    // 각 설명 글씨 컨테이너 (종, 이름, 등)
+    >div:nth-child(2){
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
+}

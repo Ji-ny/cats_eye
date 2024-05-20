@@ -1,0 +1,121 @@
+.screen_MyPage{
+    box-sizing: border-box;
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    // 세로방향으로 배치
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    column-gap: 20px;
+
+    // * 내 정보
+    .container_myinfo{
+
+        min-height: 200px;
+        min-width: 150px;
+        width: 100%;
+        height: 20%;
+        
+
+        box-sizing: border-box;
+        padding: 15px;
+        padding-bottom: 30px;
+
+        // 핑크색 선
+        .myinfo__body{
+            box-sizing: border-box;
+            border : 1px solid #FFA6A6;
+            border-radius: 15px;
+            height: 100%;
+            
+        
+            column-gap: 10px;
+            
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+        
+            place-items: center;
+            padding: 10px;
+        
+            text-align: left;
+        
+            // 이미지 부분 
+            >img{
+                // background-color: #FFB0B0;
+                border-radius: 100%;
+                box-sizing: border-box;
+                
+                height: 80%;
+                // padding: 10px;
+            }
+        
+            // 각 설명 글씨 컨테이너 (종, 이름, 등)
+            >div{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+                row-gap: 5px;
+
+                .myingo__btn-logout{
+                    background-color: #FFA6A6;
+                    box-sizing: border-box;
+                    padding: 5px;
+                    border-radius: 10px;
+                    border: 1px solid black;
+                    width: 100px;
+                    font-weight: bold;
+                    margin-top: 5px;
+                }
+            }
+
+        }
+
+    }
+
+    // *반려동물 목록
+    .container_pet-list{
+        flex: 1; // 크기 남는부분 전체 차지
+        overflow-y: scroll; // 스크롤
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        // text-align: center;
+        align-items: center; // 새로 가운대 정렬
+        box-sizing: border-box;
+        padding: 15px;
+
+        row-gap: 15px;
+        
+        font-size: 1rem;
+
+        // 반려동물 목록, 동물 추가 컨테이너
+        .pet-list__header{
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            // place-items: center;
+            // flex-direction: row;
+            width: 100%;
+            
+            // 반려동물 목록;
+            .pet-list__title{
+                font-weight: bold;
+                // flex: 1;
+                text-align: left;
+                font-size: 1.3rem;
+            }
+            // 동물 추가
+            .pet-list__btn-add{
+                font-size: 0.5rem;
+            }
+        }
+
+
+    }
+
+}

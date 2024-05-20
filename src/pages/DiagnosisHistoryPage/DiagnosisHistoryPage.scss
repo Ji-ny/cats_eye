@@ -1,0 +1,84 @@
+.screen_DiagnosisHistoryPage{
+    box-sizing: border-box;
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    // 세로방향으로 배치
+    flex-direction: column;
+    align-items: center;
+
+    column-gap: 20px;
+
+    background-color: #F5F4F1;
+
+    // 진단내역 리스트를 묶어둔 컨테이너
+    .container_diagnosis_db{
+        flex: 1; // 크기 남는부분 전체 차지
+        overflow-y: scroll; // 스크롤
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        // text-align: center;
+        align-items: center; // 새로 가운대 정렬
+        box-sizing: border-box;
+        padding: 10px;
+
+        row-gap: 15px;
+        
+        font-size: 1rem;
+        
+        // * 각각 진단내역 요소
+        .diagnosis_element{
+            box-sizing: border-box;
+            border-radius: 15px;
+            border: 1px solid black;
+
+            width: 95%;
+            height: 100%;
+            min-width: 200px;
+            // min-height: 110px;
+            
+
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+
+            place-items: center;
+            padding: 20px;
+
+            text-align: left;
+
+
+            // 진단 내역의 이미지 부분  
+            >div:nth-child(1){
+                // background-color: #FFB0B0;
+                border-radius: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                background-color: #FFB0B0;
+                // 이미지 
+                >img{
+                    
+                    width: 100%;
+                    height: 100%;
+                }
+                // padding: 10px;
+            }
+        
+            // 각 진단 내역 글씨 컨테이너 (날짜, 이름, 검사 결과)
+            >div:nth-child(2){
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: start;
+            }
+
+        }
+    }
+
+
+
+
+}

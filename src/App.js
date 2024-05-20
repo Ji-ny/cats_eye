@@ -4,6 +4,9 @@ import './App.scss';
 import { useEffect } from "react";
 import MainPage from "./pages/MainPage/MainPage";
 import ChatBotPage from "./pages/ChatBotPage/ChatBotPage";
+import DiagnosisHistoryPage from "./pages/DiagnosisHistoryPage/DiagnosisHistoryPage";
+import MyPage from "./pages/MyPage/MyPage";
+import AddPetPage from "./pages/AddPetPage/AddPetPage";
 function App() {
 
       // ** =============뷰포트 높이 구하기 ===============** //
@@ -36,6 +39,9 @@ function App() {
         <Route path="/" element={<MainPage/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/chatbot" element={<ChatBotPage/>}/>
+        <Route path="/diagnosis_history" element={<DiagnosisHistoryPage/>}/>
+        <Route path="/mypage" element={<MyPage/>}/>         {/* 마이페이지 */}
+        <Route path="/addpet" element={<AddPetPage/>} />  {/* 반려동물 추가 */}
       </Routes>
     </div>
 
