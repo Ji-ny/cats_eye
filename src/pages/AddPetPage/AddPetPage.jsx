@@ -3,16 +3,25 @@ import { DefaultBlutButton, LineDiv, TitleDefault } from "../../styles/styles_cu
 import "./AddPetPage.scss";
 import cameraImg from "../../images/camera_img.svg";
 import { useRef, useState } from "react";
+import axios from "axios";
+import useNavigates from "../../components/NavBar/useNavigates";
+
+
 // ! 반려동물 추가 페이지
 function AddPetPage(){
 
     //===== state 선언 =====//
-    const [petImage, setPetImage] = useState(''); // 동물 사진
     const [name, setName] = useState(''); // 이름 
     const [age, setAge] = useState(''); // 나이
     const [breed, setBreed] = useState(''); // 고양이 종
     const [detail, setDetail] = useState(''); // 상세내용
 
+    // 파일 state
+    const [postImg, setPostImg] = useState([]); // (동물 사진)이미지 파일 자체 상태
+    const [previewImg, setPreviewImg] = useState([]); // 이미지 파일 url 담는 상태
+
+    // * 네비게이트
+    const { goMyPage, goLogin } = useNavigates(); // 네비게이트
     //====================//
     
 
@@ -21,30 +30,31 @@ function AddPetPage(){
     // 이름 input 핸들러
     const handleNameChange = (event) => {
         setName(event.target.value);
-        console.log(name);
+        // console.log(name);
     }
     // 나이 핸들러
     const handleAgeChange = (event) => {
         setAge(event.target.value);
-        console.log(age);
+        // console.log(age);
     }
     // 종 핸드러
     const handleBreedChange = (event) => {
         setBreed(event.target.value);
-        console.log(breed);
+        // console.log(breed);
     }
     // 세부사항 핸들러
     const handleDetailChange = (event) => {
         setDetail(event.target.value);
-        console.log(detail);
+        // console.log(detail);
     }
     //================================//
 
 
-    // ** 파일!
-    const [postImg, setPostImg] = useState([]); // (동물 사진)이미지 파일 자체 상태
-    const [previewImg, setPreviewImg] = useState([]); // 이미지 파일 url 담는 상태
-    
+    // ** 파일! ================================ //
+
+    // ----- --------- --------- // 
+    // 동물 추가 페이지로 간다
+
 
     const FileUpload = ({ postImg = [], previewImg = []}) =>{
         // -------------아무곳 div에서 input 클릭만 해도 되게 --------------//
@@ -83,10 +93,7 @@ function AddPetPage(){
             // 파일 내용을 Base64 형식의 문자열로 변환해준다. (해당 DataURL을 이미지 프리뷰에 사용하기 위함이다.)
                 // -> 이걸로 프리뷰에 업로드한다.
         }
-
         // ------------------------------------------ //
-
-
         return (
             <LineDiv onClick={handleDivClick}>
                 {/* previewImg가 없으면, camera로, 있다면 preview로! */}
@@ -103,6 +110,31 @@ function AddPetPage(){
             </LineDiv>
         );
     }
+    // ** 파일 끝 ============================================ //
+
+    // ** 동물 등록하기 버튼 ==== //
+    
+    const handleAddPet =  () => {
+        // 그동안 입력해온 pet 데이터
+        const petData = {
+            image : postImg, 
+            name : name,
+            age : age,
+            breed : breed,
+            detail : detail,
+        }
+    //  ! 여기에 동물 등록하는거 전송하는 API 를 써야한다.
+        // axios.post(url, data, {headers : headers });
+
+        console.log(petData);
+        goMyPage();
+
+            
+    }
+
+    // ** ==========================//
+
+
 
     
     return(
@@ -166,7 +198,7 @@ function AddPetPage(){
             </section>
 
             <section className="btn_pet-add">
-                <DefaultBlutButton>동물 등록하기</DefaultBlutButton>
+                <DefaultBlutButton onClick={handleAddPet}>동물 등록하기</DefaultBlutButton>
             </section>
             
 

@@ -1,12 +1,27 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-let 변수 = createSlice({
-    name: '이름변수',
-    initialState: '이름변수 초기값',
-})
-
-export default configureStore({
-	reducer: {
-    	변수2: 변수.reducer
+// 상태 관리를 위한 slice를 생성
+export const isLoginSlice = createSlice({
+    name: 'isLogin', // slice의 이름을 지정 (컴포넌트와 동일하게)
+    initialState: false, // slice state의 초기 상태를 지정
+    
+    // 상태 수정 함수 생성 (setCellId)
+    reducers: { 
+        // cellId 상태 업데이트하는 함수 리듀서 선언
+        setIsLogin: (state, action) => {
+            return action.payload;
+        },
     },
 });
+
+// 액션 생성자를 export
+export const { setIsLogin } = isLoginSlice.actions;
+
+// 1. store 만들기 (store은 한개만 만들어야함.)
+const store = configureStore({
+    reducer: {
+        isLogin: isLoginSlice.reducer,
+    },
+});
+
+export default store;
