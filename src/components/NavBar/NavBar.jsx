@@ -4,32 +4,13 @@ import map_img from "../../images/map_img.svg"
 import main_img from "../../images/main_img.svg"
 import myPage_img from "../../images/myPage_img.svg"
 import { useNavigate } from "react-router-dom";
+import useNavigates from "./useNavigates";
 
 
 // ! 네비바. 
 // * 각각 챗봇 / 메인 / 지도 / 마이페이지로 이동 가능하다.
 function NavBar(){
-    const navigate = useNavigate();
-
-    // 챗봇으로 이동 
-    const goChatBotPage = () => {
-        navigate('/chatbot');
-    }
-
-    // 메인 페이지로 이동 
-    const goMainPage = () => {
-        navigate('/');
-    }
-
-    // 지도 페이지로 이동 
-    const goMapPage = () => {
-        navigate('/map');
-    }
-
-    // 마이페이지로 이동 
-    const goMyPage = () => {
-        navigate('/mypage');
-    }
+    const {goChatBotPage, goMainPage, goMapPage, goMyPage} = useNavigates();
 
     return(
         <div className="screen_NavBar">

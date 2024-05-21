@@ -4,7 +4,7 @@ import styled from "styled-components";
     // 기본 사진 + 글자 + 검정라인 버튼
 export const LineDiv = styled.div`
     box-sizing: border-box;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 15px;
     background-color: #FFFFFF;
     width: 334px;
@@ -51,7 +51,6 @@ export const  TitleDefault = styled.div`
     color: #000000;
     text-align: center;
     line-height: 2rem;
-
     display: flex;
     justify-content: center;
     align-items: center;

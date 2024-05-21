@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import './Login.scss';
 import googleLoginImg from '../../images/googleLoginImg.svg';
 
-
 const TitlePink = styled.div`
     box-sizing: border-box;
     padding: 10px;
@@ -19,8 +18,8 @@ const TitlePink = styled.div`
 
 function Login(){
 
-    const BASE_URL = `http://ec2-13-209-162-245.ap-northeast-2.compute.amazonaws.com:8080`;
-    const LOGIN_URL = `${BASE_URL}/oauth2/authorization/google`;
+    
+    const LOGIN_URL = `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/google`;
 
 
     return(
