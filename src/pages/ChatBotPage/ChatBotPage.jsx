@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ChatBotPage.scss";
 import axios from "axios";
@@ -27,6 +27,7 @@ function ChatBotPage(){
     
     const postChatSendMessage = async () => {
         addMessage('user', message); // 내 메세지 전송
+        setMessage('');
 
         try{
             const url = "ttp://ec2-13-209-162-245.ap-northeast-2.compute.amazonaws.com:8080/api/v1/chat";
@@ -48,6 +49,7 @@ function ChatBotPage(){
             console.log("성공",response);
 
             addMessage('bot', aiMessage);
+            
         }    
         catch(error){
             console.error("오류 발생!", error);
@@ -59,6 +61,9 @@ function ChatBotPage(){
 
     }
 
+    // useEffect(()=>{
+    //     console.log(message);
+    // },[message])
 
     return(
         <div className="screen_ChatBotPage">
@@ -68,7 +73,7 @@ function ChatBotPage(){
 
                 { messages.map((msg,index) => ( // 답변을 띄운다.
                 <div className = {`message ${msg.sender}`} key = {index}>
-                    {`${msg.sender === 'user' ? '나🩷' : '챗봇⭐'} : ${msg.message}`}
+                    {`${msg.sender === 'user' ? '나' : '챗봇'} : ${msg.message}`}
                 </div>
                 ))}    
 
