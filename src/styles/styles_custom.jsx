@@ -8,6 +8,7 @@ export const LineDiv = styled.div`
     border-radius: 15px;
     background-color: #FFFFFF;
     min-width: 334px;
+    min-height: 200px;
     height: 200px;
     width: 100%;
 
@@ -99,7 +100,7 @@ export const DefaultBlutButton = styled.div`
     box-sizing: border-box;
     padding: 10px;
 
-    width: 90%;
+    width: 100%;
     text-align: center;
 
     font-size: 1.5rem;
