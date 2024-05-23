@@ -1,0 +1,49 @@
+// ! 진단하기 - 펫 선택 페이지 
+.screen_PetSelect{
+    box-sizing: border-box;
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    // 세로방향으로 배치
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    // column-gap: 20px;
+
+    // 고양이 발바닥, 버튼 
+    .container_petSelect{
+        box-sizing: border-box;
+        padding:15px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        // justify-content: center;
+        row-gap: 20px;
+        padding-bottom: 20px;
+        width: 100%;
+        
+        overflow-y: scroll;
+
+
+        flex: 1;
+
+        // 고양이발바닥 div (진단할 동물이 없습니다. 동물을 추가해주세요)
+        .plus_pet_box{
+            min-width : 330px;
+            min-height: 200px;
+            background-color: #F1F1F1;
+            border-radius: 15px;
+            box-sizing: border-box;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+        }
+    }
+}

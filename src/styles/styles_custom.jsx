@@ -7,8 +7,9 @@ export const LineDiv = styled.div`
     /* padding: 10px; */
     border-radius: 15px;
     background-color: #FFFFFF;
-    width: 334px;
+    min-width: 334px;
     height: 200px;
+    width: 100%;
 
     border: 0.5px solid black;
     display: flex;
@@ -55,7 +56,29 @@ export const  TitleDefault = styled.div`
     justify-content: center;
     align-items: center;
     min-height: 50px;
-    height: 10%;
+    /* height: 10%; */
+    width: 100%;
+
+
+
+`;
+
+// 서브 제목 : 회색 기본 제목 ( 진단할 동물을 선택해주세요..)
+export const  SubTitleDefault = styled.div`
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    
+    font-size: 1.25rem; // 25px
+    /* font-weight: bold; */
+    color: #6C6C6C;
+    text-align: center;
+    line-height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 15px;
+    /* height: 10%; */
     width: 100%;
 
 
@@ -76,7 +99,7 @@ export const DefaultBlutButton = styled.div`
     box-sizing: border-box;
     padding: 10px;
 
-    width: 100%;
+    width: 90%;
     text-align: center;
 
     font-size: 1.5rem;
