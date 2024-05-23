@@ -8,6 +8,7 @@ import DiagnosisHistoryPage from "./pages/DiagnosisHistoryPage/DiagnosisHistoryP
 import MyPage from "./pages/MyPage/MyPage";
 import AddPetPage from "./pages/AddPetPage/AddPetPage";
 import MapPage from "./pages/MapPage/MapPage";
+import DiagnosisPage from "./pages/DiagnosisPage/DiagnosisPage";
 function App() {
 
       // ** =============뷰포트 높이 구하기 ===============** //
@@ -41,6 +42,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/chatbot" element={<ChatBotPage/>}/>
         <Route path="/diagnosis_history" element={<DiagnosisHistoryPage/>}/>
+        <Route path="/diagnosis" element={<DiagnosisPage/>}/> {/* 진단하기 */}
         <Route path="/mypage" element={<MyPage/>}/>         {/* 마이페이지 */}
         <Route path="/addpet" element={<AddPetPage/>} />  {/* 반려동물 추가 */}
         <Route path="/map" element = {<MapPage/>} /> {/* 근저처 병원 페이지 */}

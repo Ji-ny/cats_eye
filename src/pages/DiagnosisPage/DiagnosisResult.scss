@@ -1,0 +1,70 @@
+// ! 진단 결과 페이지!
+.screen_DiagnosisResult{
+    box-sizing: border-box;
+    
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    // 세로방향으로 배치
+    flex-direction: column;
+    align-items: center;
+
+    // 진단결과 바디
+    .container_DiagnosisResult{
+        box-sizing: border-box;
+        padding:15px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        // justify-content: center;
+        row-gap: 20px;
+        padding-bottom: 20px;
+        width: 100%;
+        
+        overflow-y: scroll;
+
+
+        flex: 1;
+
+        // 결과 이미지
+        .diagnosis_result_img{
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+        // 결과 내용
+        .diagnosis_result_contents{
+            box-sizing: border-box;
+            padding-left: 10px;
+            list-style: none; // *스타일을 없애준다. (점을 없앰)
+            margin-top: 2px;
+            margin-bottom: 2px;
+            font-weight: 545;
+            font-size: 1.3rem;   
+            text-align: left;
+            flex: 1; // 남은 칸 차지
+            
+            // 해당 사진의 AI 진단 결과,
+            .result_title{
+                font-weight: bold;
+                font-size: 1.5rem;
+                
+
+
+            }
+
+            // 결과 li 수정
+            .result_li::before { // li 전에, 별을 넣어주자.
+                box-sizing: border-box;
+                content: "⭐ ";
+                padding-left: 10px; // 왼쪽에 조금 옮겨줌
+                
+            }
+        }
+
+
+    }
+}

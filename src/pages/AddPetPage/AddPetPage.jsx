@@ -5,7 +5,7 @@ import cameraImg from "../../images/camera_img.svg";
 import { useRef, useState } from "react";
 import axios from "axios";
 import useNavigates from "../../components/NavBar/useNavigates";
-import FileUpload from "../../components/FileUpload.jsx/FileUpload";
+import FileUpload from "../../components/FileUpload/FileUpload";
 
 
 
