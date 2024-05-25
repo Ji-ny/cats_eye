@@ -58,27 +58,25 @@ function AddPetPage(){
     // ** 동물 등록하기 버튼 ==== //
     
     const handleAddPet =  async () => {
-        // 그동안 입력해온 pet 데이터
-        const petData = {
-            Dto : {
+        // // 그동안 입력해온 pet 데이터
+        const dtoData = {
                 name : name,
                 age : age,
                 species : species,
                 comment : comment,
-            }
-            ,Image : postImg[0],
-            
-
         }
 
         const formData = new FormData();
-        formData.append('Dto', petData.Dto); // Dto 데이터 JSON 문자열로 변환
-        formData.append('Image', postImg[0]); // 이미지 파일 FormData에 추가
+        // applicatin/json 으로 Dto 데이터 추가.
+        formData.append("Dto", new Blob([JSON.stringify(dtoData)], {
+            type: "application/json"
+        }))
+        formData.append('Image', postImg[0] ); // 이미지 파일 FormData에 추가
 
-        console.log('petFormData',petData);
+        console.log(formData);
+        // console.log('petFormData',petData);
         //  ! 여기에 동물 등록하는거 전송하는 API 를 써야한다.
         const URL = `/api/v1/pet/enroll`;
-        defaultAxios.defaults.headers["Content-type"] = 'application/json'; // 임시로 추가
         // console.log(defaultAxios.defaults.headers)
 
         // const header = {"Content-type": "application/json" }
@@ -93,7 +91,7 @@ function AddPetPage(){
             // console.log(error.response);
         }
 
-        console.log(petData);
+        // console.log(petData);
         goMyPage();
 
     }
