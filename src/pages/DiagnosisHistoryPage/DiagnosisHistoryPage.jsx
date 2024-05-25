@@ -5,51 +5,48 @@ import { TitleDefault } from "../../styles/styles_custom";
 import "./DiagnosisHistoryPage.scss";
 
 import testImg from "../../images/diagnosis_img.svg"
+import { useEffect, useState } from "react";
+import defaultAxios from "../../apis/defaultAxios";
 
 function DiagnosisHistoryPage(){
 
+
     // 동물 진단 리스트
-    const diagnosisHistoryList = [
+    const [diagnosisHistoryList, setDiagnosisHistoryList] = useState([
         {
-            image : testImg,
-            date : "2022.01.10",
+            diagnosisImageUrl : testImg,
+            time : "2022.01.10",
             name: "테레",
-            result : "정상"
-        },
-        {
-            image : testImg,
-            date : "2022.01.10",
-            name: "햄찌",
-            result : "비정상"
-        },
-        {
-            image : testImg,
-            date : "2022.01.10",
-            name: "테레",
-            result : "정상"
-        },
-        {
-            image : testImg,
-            date : "2022.01.10",
-            name: "테레",
-            result : "정상"
-        },
-        {
-            image : testImg,
-            date : "2022.01.10",
-            name: "테레",
-            result : "정상"
-        },
-        {
-            image : testImg,
-            date : "2022.01.10",
-            name: "테레",
-            result : "정상"
+            diagnosisResult : "정상"
         }
-    ];
-
-
+    ]);
     
+
+    // 내 반려동물 진단 내역 조회--------- //
+    // const getDiagnosisHistoryList = async () => {
+    //     const URL = `/api/v1/diagnosis/search`;
+    //     // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
+        
+    //     try{
+    //         const response = await defaultAxios.get( URL);
+    //         console.log('성공 /api/v1/diagnosis/search response : ', response);
+
+    //         // userInfo 업데이트
+    //         setDiagnosisHistoryList(response.data.result);
+    //         // console.log(userInfo);
+    //     }    
+    //     catch(error){
+    //         console.error("오류 발생!", error);
+    //         // console.log(error.response);
+    //     }
+
+    // }
+    // // -------------------------- //
+
+    // useEffect(()=>{
+    //     // 첫 렌더링시 동물진단정보받기
+    //     getDiagnosisHistoryList();
+    // },[])
 
     return(
         <div className="screen_DiagnosisHistoryPage">
@@ -60,11 +57,11 @@ function DiagnosisHistoryPage(){
                 {diagnosisHistoryList.map((value, index) => (
                     // * 사진
                     <section key={index} className="diagnosis_element">
-                        <div><img src={value.image} alt="기존 진단 사진" /></div>
+                        <div><img src={value.diagnosisImageUrl} alt="기존 진단 사진" /></div>
                         <div>
-                            <div>날짜 : {value.date}</div>
+                            <div>날짜 : {value.time}</div>
                             <div>이름 : {value.name}</div>
-                            <div>검사결과 : {value.result}</div>
+                            <div>검사결과 : {value.diagnosisResult}</div>
                         </div>
                     </section>
                 ))}

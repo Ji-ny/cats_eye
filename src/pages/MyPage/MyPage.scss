@@ -42,6 +42,8 @@
             padding: 10px;
         
             text-align: left;
+
+            
         
             // 이미지 부분 
             >img{
@@ -60,6 +62,7 @@
                 justify-content: center;
                 align-items: start;
                 row-gap: 5px;
+                // overflow-x: hidden;
 
                 .myingo__btn-logout{
                     background-color: #FFA6A6;

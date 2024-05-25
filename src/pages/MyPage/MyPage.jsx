@@ -9,73 +9,52 @@ import useNavigates from "../../components/NavBar/useNavigates";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLogin } from "../../store/store";
+import axios, { AxiosError } from 'axios';
+import { useEffect, useState } from "react";
+import defaultAxios from "../../apis/defaultAxios";
+// process.env.REACT_APP_BASE_URL
 
 
 function MyPage(){
-    // ==== * 전역변수 관리 ====== //
-    // * 전역 변수 받아오기 (로그인 상태)
+    // ==== * 전역상태 관리 ====== //
+    // * 전역 상태 받아오기 (로그인 상태)
     const isLogin = useSelector(state => state.isLogin); // 전역 redux stroe 내의 isLogin을가져온다.
 
-    // * 전역변수 isLogin - 수정하는 함수 받아오기 ex ( dispatch(setIsLogin(true)))
+    // * 전역상태 isLogin - 수정하는 함수 받아오기 ex ( dispatch(setIsLogin(true)))
     const dispatch = useDispatch();
-
-    // ====================== //
-
-    // 네비게이트 함수 
-    const {goAddPet, goLogin} = useNavigates();
-
     
-    // 반려동물 목록
-    const petList = [
-        {
-            image : testImg,
-            age : 5,
-            name: "테레",
-            breed : "말티즈" ,// 종,
-            detail : "기타사항입니다"
-
-        },
-        {
-            image : testImg,
-            age : 5,
-            name: "테레",
-            breed : "말티즈" ,// 종,
-            detail : "기타사항입니다"
-
-        },
-        {
-            image : testImg,
-            age : 5,
-            name: "테레",
-            breed : "말티즈" ,// 종,
-            detail : "기타사항입니다"
-
-        },
-        {
-            image : testImg,
-            age : 5,
-            name: "테레",
-            breed : "말티즈" ,// 종,
-            detail : "기타사항입니다"
-        },            
-        {
-            image : testImg,
-            age : 5,
-            name: "테레",
-            breed : "말티즈" ,// 종,
-            detail : "기타사항입니다"
-        }
-
-        
-
-    ];
+    // ====================== //
+    // ** 상태 & 변수관리 =========== //
+    const BASEURL = process.env.REACT_APP_BASE_URL; //.env 파일로부터 API 키를 받아온다.
 
     // 유저 정보 
-    const userInfo = {
+    const [userInfo, setUserInfo] = useState( {
         image : testImg,
         name : "김땡땡",
         email : "abc@gmail.com"
-    }
+    })
+
+    // 반려동물 목록
+    const [petList, setPetList] = useState([
+        {   
+            name: "테레",
+            age : 5,
+            species : "말티즈" ,// 종,
+            comment : "기타사항입니다",
+            petImageUrl : testImg,
+
+    },]);
+    // ** ======================== //
+
+
+    // 네비게이트 함수 
+    const {goAddPet, goLogin} = useNavigates();
+    
+
+
+
+
+    
 
         
     // ** 로그아웃 버튼 ============//
@@ -93,8 +72,71 @@ function MyPage(){
     }
 
     // ** 로그아웃 끝 ================//
-        
 
+
+
+
+        
+    // ** 유저 ======== //
+    // 사용자 정보 받기 ---------- //
+    const getAuthInfo = async () => {
+        const URL = `/api/v1/auth/info`;
+        // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
+        
+        try{
+            const response = await defaultAxios.get( URL);
+            console.log('성공 /api/v1/auth/info response : ', response);
+
+            // userInfo 업데이트
+            setUserInfo(
+            {
+                email: response.data.result.email,
+                name: response.data.result.name,
+                image: response.data.result.profileUrl
+            });
+            // console.log(userInfo);
+        }    
+        catch(error){
+            console.error("오류 발생!", error);
+            // console.log(error.response);
+        }
+
+    }
+    // -------------------------- //
+
+    // ** =============== //
+
+    // ** 반려동물 ===== // 
+
+    // 반려동물 목록 데이터 받기 ----- //
+    const getPetList = async () => {
+        const URL = `/api/v1/pet/search`;
+
+        try{
+
+            // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
+            const response = await defaultAxios.get( URL);
+            console.log('성공 getPetLis response : ', response);
+
+            // setPetList(반려동물 목록) 업데이트
+            // setPetList(response.data.result);
+            console.log(response);
+        }    
+        catch(error){
+            console.error("오류 발생!", error);
+        }
+
+    }
+    // ------------------------------ //
+
+    // ** ===============
+
+    // 페이지가 처음 렌더링 됐을떄,
+    useEffect(() => {
+        getAuthInfo(); // 사용자 정보를 받아온다.
+        getPetList(); // 반려동물 데이터를 받아온다.
+    } ,[]);
+ //
 
 
     return(
@@ -105,7 +147,7 @@ function MyPage(){
                     <div><img src={userInfo.image} alt="기존 진단 사진" /></div>
                     <div>
                         <div>이름 : {userInfo.name}</div>
-                        <div>나이 : {userInfo.email}</div>
+                        <div>이메일 : {userInfo.email}</div>
                         <button className="myingo__btn-logout" onClick={handleLogout}>로그아웃</button>
                     </div>
                 </div>

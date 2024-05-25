@@ -2,10 +2,11 @@
 import { DefaultBlutButton, LineDiv, TitleDefault } from "../../styles/styles_custom";
 import "./AddPetPage.scss";
 import cameraImg from "../../images/camera_img.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import useNavigates from "../../components/NavBar/useNavigates";
 import FileUpload from "../../components/FileUpload/FileUpload";
+import defaultAxios from "../../apis/defaultAxios";
 
 
 
@@ -15,8 +16,8 @@ function AddPetPage(){
     //===== state 선언 =====//
     const [name, setName] = useState(''); // 이름 
     const [age, setAge] = useState(''); // 나이
-    const [breed, setBreed] = useState(''); // 고양이 종
-    const [detail, setDetail] = useState(''); // 상세내용
+    const [species, setSpecies] = useState(''); // 고양이 종
+    const [comment, setComment] = useState(''); // 상세내용
 
     // 파일 state
     const [postImg, setPostImg] = useState([]); // (동물 사진)이미지 파일 자체 상태
@@ -40,13 +41,13 @@ function AddPetPage(){
         // console.log(age);
     }
     // 종 핸드러
-    const handleBreedChange = (event) => {
-        setBreed(event.target.value);
+    const handleSpeciesChange = (event) => {
+        setSpecies(event.target.value);
         // console.log(breed);
     }
     // 세부사항 핸들러
-    const handleDetailChange = (event) => {
-        setDetail(event.target.value);
+    const handleCommentChange = (event) => {
+        setComment(event.target.value);
         // console.log(detail);
     }
     //================================//
@@ -56,28 +57,53 @@ function AddPetPage(){
 
     // ** 동물 등록하기 버튼 ==== //
     
-    const handleAddPet =  () => {
+    const handleAddPet =  async () => {
         // 그동안 입력해온 pet 데이터
         const petData = {
-            image : postImg, 
-            name : name,
-            age : age,
-            breed : breed,
-            detail : detail,
+            Dto : {
+                name : name,
+                age : age,
+                species : species,
+                comment : comment,
+            }
+            ,Image : postImg[0],
+            
+
         }
-    //  ! 여기에 동물 등록하는거 전송하는 API 를 써야한다.
-        // axios.post(url, data, {headers : headers });
+
+        const formData = new FormData();
+        formData.append('Dto', petData.Dto); // Dto 데이터 JSON 문자열로 변환
+        formData.append('Image', postImg[0]); // 이미지 파일 FormData에 추가
+
+        console.log('petFormData',petData);
+        //  ! 여기에 동물 등록하는거 전송하는 API 를 써야한다.
+        const URL = `/api/v1/pet/enroll`;
+        defaultAxios.defaults.headers["Content-type"] = 'application/json'; // 임시로 추가
+        // console.log(defaultAxios.defaults.headers)
+
+        // const header = {"Content-type": "application/json" }
+        try{
+            const response = await defaultAxios.post( URL, formData);
+            console.log('펫 추가하기 성공/pet/enroll response : ', response);
+            alert(`${name}이(가) 추가되었습니다.`);
+        }    
+        catch(error){
+            alert(`${name}이(가) 추가되지 않았습니다 (오류).`);
+            console.error("오류 발생!", error);
+            // console.log(error.response);
+        }
 
         console.log(petData);
         goMyPage();
 
-            
     }
 
     // ** ==========================//
 
 
-
+    useEffect(()=>{
+        console.log('postimg', postImg[0])
+    },[postImg])
     
     return(
         <div className="screen_AddPetPage">
@@ -119,8 +145,8 @@ function AddPetPage(){
                             className ="pet-form__input"
                             type='text'
                             placeholder='ex) 페르시안'
-                            value={breed}
-                            onChange={handleBreedChange}
+                            value={species}
+                            onChange={handleSpeciesChange}
                         /> 
                     </div>
                 </div>
@@ -132,8 +158,8 @@ function AddPetPage(){
                             className ="pet-form__input"
                             type='text'
                             placeholder='ex) 귀여움'
-                            value={detail}
-                            onChange={handleDetailChange}
+                            value={comment}
+                            onChange={handleCommentChange}
                         /> 
                     </div>
                 </div>
