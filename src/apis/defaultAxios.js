@@ -1,7 +1,10 @@
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+
 // 헤더가 자동으로, 리프레시 토큰 요청을 자동으로 axios 설정!
 // process.env.REACT_APP_BASE_URL
 //todo 리프레시 성골하면, 전역변수로 로그인 상태 true로 해줘야함
+
 
 // axios 인스턴스 생성하기
 const defaultAxios = axios.create({
@@ -57,8 +60,16 @@ const resetTokenAndReattemptRequest = async ( originalRequest ) => { // original
         return axios(originalRequest); // 원래 요청을 재시도
 
     } catch (retryError) {
-        // console.error('재시도 중 오류 발생!', retryError);
-
+        // 만약, 리프레시 토큰도 만료라면,
+        if (retryError?.response?.data?.code === "JWT-401"){
+            console.error("재시도 중 리프레시 토큰 만료!", retryError.response.data.code);
+            // todo : redux 로그인 상태를 false로 넣어준다.
+            // 로그인으로 이동.
+            alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
+            window.location.href = 'http://localhost:3000/login';
+        } 
+        console.error('재시도 중 오류 발생!', retryError);
+        
         return Promise.reject(retryError); // 에러 반환
     }
 
@@ -81,7 +92,7 @@ defaultAxios.interceptors.response.use(
 
         //! 이렇게하면 모든 401을 이걸로 처리하니 주의 . 나중에 후처리 해주자
         // 인증 에러 발생시 ( error 객체를 이용하여 status가 401인지를 확인)
-        if  (errorResponse.data.code == "AUTH-401"){ //(errorResponse.status === 401) {
+        if  (errorResponse?.data?.code === "AUTH-401"){ //(errorResponse.status === 401) {
             try {
                 return await resetTokenAndReattemptRequest(originalRequest); // 토큰을 리셋하고 원래 요청을 다시 보냄
             } catch (retryError) {

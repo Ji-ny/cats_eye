@@ -81,7 +81,7 @@ function MyPage(){
         
         try{
             const response = await defaultAxios.get( URL);
-            console.log('성공 /api/v1/auth/info response : ', response);
+            // console.log('성공 /api/v1/auth/info response : ', response);
 
             // userInfo 업데이트
             setUserInfo(
@@ -111,12 +111,12 @@ function MyPage(){
         try{
 
             // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
-            const response = await defaultAxios.get( URL);
-            console.log('성공 getPetLis response : ', response);
+            const response = await defaultAxios.get(URL);
+            // console.log('성공 getPetLis response : ', response);
 
             // setPetList(반려동물 목록) 업데이트
             setPetList(response.data.result);
-            console.log(response);
+            // console.log(response);
         }    
         catch(error){
             console.error("오류 발생!", error);
@@ -158,10 +158,13 @@ function MyPage(){
                     <span className="pet-list__title"> 반려동물 목록 </span>
                     <DefaultBlutButton className="pet-list__btn-add" onClick={goAddPet}>동물 추가 +</DefaultBlutButton>
                 </div>
-                {/* //펫리스트 맵을 넣어줌 */}
-                {petList.map((value, index) => (
-                    <PetComponent key={index} pet={value}/>
-                ))}
+                <div className="pet-list__body">
+                    {/* //펫리스트 맵을 넣어줌 */}
+                    {petList.map((value, index) => (
+                        <PetComponent key={index} pet={value}/>
+                    ))}
+                </div>
+
                 
             </section>
 
