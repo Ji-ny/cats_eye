@@ -6,10 +6,10 @@ const PetComponent = ({pet, onClick = () => console.log('클릭됨!')}) =>{ // �
         <section onClick = {onClick} className="pet_container">
             <div><img src={pet.petImageUrl} alt="기존 진단 사진" /></div>
             <div>
-                <div>이름 : {pet.name}</div>
-                <div>나이 : {pet.age}</div>
-                <div>종 : {pet.species}</div>
-                <div>상세내용 : {pet.comment}</div>
+                <li>이름 : {pet.name}</li>
+                <li>나이 : {pet.age}</li>
+                <li>종 : {pet.species}</li>
+                <li>상세내용 : {pet.comment}</li>
             </div>
         </section>
     );

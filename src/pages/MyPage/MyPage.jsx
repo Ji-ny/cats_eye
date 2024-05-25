@@ -49,12 +49,8 @@ function MyPage(){
 
     // 네비게이트 함수 
     const {goAddPet, goLogin} = useNavigates();
-    
 
 
-
-
-    
 
         
     // ** 로그아웃 버튼 ============//
@@ -119,7 +115,7 @@ function MyPage(){
             console.log('성공 getPetLis response : ', response);
 
             // setPetList(반려동물 목록) 업데이트
-            // setPetList(response.data.result);
+            setPetList(response.data.result);
             console.log(response);
         }    
         catch(error){
@@ -129,7 +125,7 @@ function MyPage(){
     }
     // ------------------------------ //
 
-    // ** ===============
+    // ** =============== //
 
     // 페이지가 처음 렌더링 됐을떄,
     useEffect(() => {

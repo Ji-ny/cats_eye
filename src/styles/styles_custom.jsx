@@ -22,7 +22,7 @@ export const LineDiv = styled.div`
     cursor: pointer;
 `;
 
-// 캣츠아이 : 핑크색 타이틀
+// * 캣츠아이 : 핑크색 타이틀
 export const  TitlePink = styled.div`
     box-sizing: border-box;
     padding: 10px;
@@ -43,7 +43,7 @@ export const  TitlePink = styled.div`
 
 `;
 
-// 제목 : 기본 제목 페이지들 (챗봇 페이지, 등..)
+// * 제목 : 기본 제목 페이지들 (챗봇 페이지, 등..)
 export const  TitleDefault = styled.div`
     box-sizing: border-box;
     padding: 10px;
@@ -64,7 +64,7 @@ export const  TitleDefault = styled.div`
 
 `;
 
-// 서브 제목 : 회색 기본 제목 ( 진단할 동물을 선택해주세요..)
+// * 서브 제목 : 회색 기본 제목 ( 진단할 동물을 선택해주세요..)
 export const  SubTitleDefault = styled.div`
     box-sizing: border-box;
     padding-top: 5px;
@@ -90,7 +90,7 @@ export const  SubTitleDefault = styled.div`
 
 
 
-// 버튼 : 기본 블루 색 버튼
+// * 버튼 : 기본 블루 색 버튼
 export const DefaultBlutButton = styled.div`
     background-color: #B6CCD8;
     border-radius: 10px;
@@ -105,6 +105,7 @@ export const DefaultBlutButton = styled.div`
 
     font-size: 1.5rem;
 
+    cursor: pointer;
 
 `
 
