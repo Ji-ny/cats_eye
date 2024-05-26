@@ -10,6 +10,11 @@
     flex-direction: column;
     align-items: center;
 
+    // 반응형
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
+
     // 진단결과 바디
     .container_DiagnosisResult{
         box-sizing: border-box;

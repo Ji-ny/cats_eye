@@ -25,7 +25,6 @@ function MyPage(){
     
     // ====================== //
     // ** 상태 & 변수관리 =========== //
-    const BASEURL = process.env.REACT_APP_BASE_URL; //.env 파일로부터 API 키를 받아온다.
 
     // 유저 정보 
     const [userInfo, setUserInfo] = useState( {
@@ -36,14 +35,15 @@ function MyPage(){
 
     // 반려동물 목록
     const [petList, setPetList] = useState([
-        {   
-            name: "테레",
-            age : 5,
-            species : "말티즈" ,// 종,
-            comment : "기타사항입니다",
-            petImageUrl : testImg,
+    //     {   
+    //         name: "테레",
+    //         age : 5,
+    //         species : "말티즈" ,// 종,
+    //         comment : "기타사항입니다",
+    //         petImageUrl : testImg,
 
-    },]);
+    // },
+    ]);
     // ** ======================== //
 
 
@@ -112,18 +112,53 @@ function MyPage(){
 
             // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
             const response = await defaultAxios.get(URL);
-            // console.log('성공 getPetLis response : ', response);
+            console.log('성공 getPetLis response : ', response);
 
             // setPetList(반려동물 목록) 업데이트
             setPetList(response.data.result);
-            // console.log(response);
+            console.log(response);
         }    
         catch(error){
-            console.error("오류 발생!", error);
+            if (error.response.data.code =="4010"){
+                alert("반려동물이 등록되어 있지 않습니다.");
+            }else{
+                console.error("오류 발생!", error);
+            }
+            
         }
 
     }
     // ------------------------------ //
+
+    // 내 반려동물 삭제하기
+    const handlePetRemove = async (petId)  => {
+
+        if (window.confirm(`해당 반려동물을 삭제하시겠습니까?`) === true){    //삭제하는 경우, 삭제 메소드 실행
+            const URL =`/api/v1/pet/remove`;
+            // const data = {petId : petId}; // 삭제할 petId ()
+            // 폼 형식으로 만들어준다.
+            const formData = new FormData();
+            // formData.append("petId", new Blob([JSON.stringify(data)],{type : "application/json"})); 
+            formData.append("petId", JSON.stringify(petId));
+    
+            try{
+                const response = await defaultAxios.patch(URL, formData);
+                console.log('삭제성공 /api/v1/pet/remove : ', response);
+    
+                // setPetList(반려동물 목록) 다시 업데이트
+                getPetList();
+            }    
+            catch(error){
+                console.error("오류 발생!", error);
+            }
+        }else{
+            alert("삭제가 취소되었습니다.")
+        }
+
+
+    }
+
+    
 
     // ** =============== //
 
@@ -161,7 +196,11 @@ function MyPage(){
                 <div className="pet-list__body">
                     {/* //펫리스트 맵을 넣어줌 */}
                     {petList.map((value, index) => (
-                        <PetComponent key={index} pet={value}/>
+                        <div className="pet-list__component">
+                            <button className="myingo__btn-remove" onClick = {()=>{ handlePetRemove(value?.perId)}}>삭제 </button>
+                            <PetComponent  key={index} pet={value}/>
+                        </div>
+                        
                     ))}
                 </div>
 

@@ -53,26 +53,6 @@ function MainPage(){
             }
         }
     }, []);
-    // // ** 로그인 상태 저장하기
-    // useEffect(()=>{
-    //     // 만약, 리다이렉트 페이지가 아니고, isLogin이 false라면?
-    //     if (isLogin){
-            
-    //     }
-    //     if (!isLogin && new URL(window.location.href).searchParams.get("accessToken") == null){
-    //         setIsLogin(false); // 로그인 상태 false
-    //         goLogin(); // 로그인 페이지로 이동
-    //     }
-    //     else { // 만약, 리다이렉트 페이지라면,
-    //         const ACCESS_TOKEN = new URL(window.location.href).searchParams.get("accessToken");
-    //         const REFRESH_TOKEN = new URL(window.location.href).searchParams.get("refreshToken");
-    //         // 로컬스트리지에 토큰을 저장한다.
-    //         localStorage.setItem('ACCESS_TOKEN' , ACCESS_TOKEN); 
-    //         localStorage.setItem('REFRESH_TOKEN' , REFRESH_TOKEN);
-            
-    //         setIsLogin(true); // 로그인 상태로 변경
-    //     }
-    // },[]);
 
 
     

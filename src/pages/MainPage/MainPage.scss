@@ -13,7 +13,9 @@
     // padding: 10px;
     // background-color: #334155;
 
-
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
     // background-image: linear-gradient( #FFFFFF, #FFA6A6); /* 그라데이션 */
 
 // 진단하기, 진단내역조회 컨테이너

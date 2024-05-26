@@ -16,7 +16,10 @@
     // background-color: #334155;
     background-color: #F5F4F1;
 
-
+    // 반응형
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
 
         // 채팅 내용 컨테이너 
         .chat_output_container{

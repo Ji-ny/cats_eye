@@ -10,6 +10,11 @@
     // justify-content: center;
     column-gap: 20px;
 
+    // 반응형
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
+
     // 지도 맵
     .container_map{
         flex: 1;

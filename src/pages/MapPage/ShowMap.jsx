@@ -11,8 +11,9 @@ import defaultAxios from '../../apis/defaultAxios';
 function ShowMap(){
     // console.log(navigator.geolocation);
 
-    const [myLatitude, setMyLatitude] = useState( null); // 위도 기본 울대 (x)
-    const [myLongitude, setMyLongitude] = useState(null); // 경도 : 기본 울대 (y)
+    // 기본 위치를 null로 하지 않고, 정해줌으로서 내 위치 제대로 나온다. (이게뭐임?)
+    const [myLatitude, setMyLatitude] = useState( 35.5459795); // 위도 기본 울대 (x)
+    const [myLongitude, setMyLongitude] = useState(129.2580912); // 경도 : 기본 울대 (y)
     const [markerDetailData, setMarkerDetailData] = useState(null); // 마커 디테일 정보 (약국/ 병원) 
 
 
@@ -37,41 +38,8 @@ function ShowMap(){
 
     // const [hospitalData, setHospitalData]  = useState([]); // 병원 위치 데이터
 
-    const [markerData,setMarkerData] =useState( [
-        {
-            facility: '울산대학교', // name
-            lat : 35.54427, // x
-            lng : 129.2563, // y,
-            type : "Hospital"
-        },
+    const [markerData,setMarkerData] =useState( [] )
 
-        {
-            facility: '타코야킹',
-            lat : 35.54734, 
-            lng : 129.2590,
-            type : "pharmacy" // 약국
-        }
-    ] )
-
-
-    // //========= 상태 ==============//
-    // // 위치 정보를 받아옵니당
-    // const [ricData, setRicData] = useState([]);
-    // //=============================//
-    // const getRicData = async () => {
-    //     try {
-    //     let url = `http://localhost:5000/ric-info`;
-    //     const response = await axios.get(url); // 호출해 데이터를 가져온다.
-        
-    //     // 성공 핸들링
-    //     setRicData(response.data);
-        
-    //     } catch (error) {
-    //     // 실패시 핸들링
-    //     console.log(error);
-    //     // throw error; // 오류를 다시 던져서 호출한 쪽에서 오류 처리 가능
-    //     }
-    // }    
 
     // **지도 데이터 조회 --------- //
     const getMarkers = async () => {
@@ -80,7 +48,7 @@ function ShowMap(){
         
         try{
             const response = await defaultAxios.get( URL);
-            // console.log('성공 /api/v1/marker response : ', response);
+            console.log('성공 /api/v1/marker response : ', response);
 
             // userInfo 업데이트
             setMarkerData(response.data.result);
@@ -92,16 +60,31 @@ function ShowMap(){
         }
 
     }
-// todo. 현재위치 이상하게 찍히는것도 해결해야함
-    useEffect(()=>{
-        getCurrentPos();
-        getMarkers();
-    },[]);
-    
-    useEffect(()=>{
-        // console.log(myLatitude,myLongitude,markerData)
-    },[myLatitude,myLongitude,markerData])
 
+// // todo. 현재위치 이상하게 찍히는것도 해결해야함
+    useEffect(()=>{
+        getMarkers(); // 마커 먼저 위치 받고.       
+    },[]);
+
+    useEffect(()=>{
+
+        // 마커 위치가 여러개라면!
+        if (markerData.length>0){
+            getCurrentPos(); // 현재 위치 받기
+        }
+        
+        
+    },[markerData]);
+
+
+    useEffect(()=>{
+        console.log(myLatitude,myLongitude)
+    },[myLatitude,myLongitude]
+    )
+
+
+    
+    
 
     // ** 마커 클릭시, ------------------------------------- //
     // 디테일한 병원 / 약국 정보 얻기 
@@ -132,47 +115,57 @@ function ShowMap(){
 
     return(
         <Map // 지도를 표시할 Container
-            center={{ lat: myLatitude , lng: myLongitude }} // 지도 중심 좌표 (etri 11동 건물 기준)
+            center={{ lat: myLatitude , lng: myLongitude}} //  lat: myLatitude , lng: myLongitude지도 중심 좌표 (etri 11동 건물 기준)
             style={{ width: "100%", height: "100%" , borderRadius:"10px" }}
-            level={5}
+            level={4}
         >
-            {markerData.map((marker, index) => (
 
-                <MapMarker 
-                    key = {index}
-                    position={{lat : marker.lat, lng : marker.lng}} 
-                    
-                    image={ marker.type === "Hospital" ? // * 병원이라면 : 병원 마커 
-                    { 
-                        //마커 이미지 설정
-                        src: markerHospitalImg,
-                        // 마커 커스텀 이미지 사이즈 지정    
-                        size: {
-                            width: 40,
-                            height: 40,
-                            },        
-                    } :
+        {/* 내 위치  */}
+        <MapMarker position={{ lat : myLatitude, lng : myLongitude }}> 
+            <div style={{ color: "#ff0000"}} >  
+                    <div>  현재 내 위치 </div>
+                    <div> lat : {myLatitude}, lan : {myLongitude}</div>
+            </div>
+        </MapMarker>
 
-                    { // * 약국이라면 : 약국 마커 
-                        //마커 이미지 설정
-                        src: markerImg,
-                        // 마커 커스텀 이미지 사이즈 지정    
-                        size: {
-                            width: 40,
-                            height: 40,
-                            },        
-                    }
-                }
-                    // 마커의 클릭 버튼
-                    onClick={ ()=>{handleClickMarker(marker)}}
+        {markerData?.map((marker, index) => (
 
-                >
-                    {/* 마커 위에 띄울 것 (제목) */}
-                    <div style={{ color: "#000", borderRadius:"10px" }} >  
-                        <div>  {marker.facility} </div>
-                    </div>
-                </MapMarker>
-            ))}
+        <MapMarker 
+            key = {index}
+            position={{lat : marker.lat, lng : marker.lng}} 
+            
+            image={ marker.type === "Hospital" ? // * 병원이라면 : 병원 마커 
+            { 
+                //마커 이미지 설정
+                src: markerHospitalImg,
+                // 마커 커스텀 이미지 사이즈 지정    
+                size: {
+                    width: 40,
+                    height: 40,
+                    },        
+            } :
+
+            { // * 약국이라면 : 약국 마커 
+                //마커 이미지 설정
+                src: markerImg,
+                // 마커 커스텀 이미지 사이즈 지정    
+                size: {
+                    width: 40,
+                    height: 40,
+                    },        
+            }
+        }
+            // 마커의 클릭 버튼
+            onClick={ ()=>{handleClickMarker(marker)}}
+
+        >
+            {/* 마커 위에 띄울 것 (제목) */}
+            <div style={{ color: "#000", borderRadius:"10px" }} >  
+                <div>  {marker.facility} </div>
+            </div>
+        </MapMarker>
+        ))}
+
 
         </Map>
     );

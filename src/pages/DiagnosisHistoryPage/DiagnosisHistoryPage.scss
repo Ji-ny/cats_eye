@@ -13,6 +13,11 @@
 
     background-color: #F5F4F1;
 
+    // 반응형
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
+
     // 진단내역 리스트를 묶어둔 컨테이너
     .container_diagnosis_db{
         flex: 1; // 크기 남는부분 전체 차지
