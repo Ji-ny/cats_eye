@@ -60,7 +60,7 @@ function MainPage(){
     return(
         <div className="screen_MainPage">
 
-            <TitlePink>캣츠아이</TitlePink>
+            <TitlePink>Cat's eye</TitlePink>
 
             <div className="container_MainPage">
                 <LineDiv onClick={goDiagnosis}>

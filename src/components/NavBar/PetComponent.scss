@@ -2,7 +2,7 @@
     box-sizing: border-box;
     border-radius: 15px;
     border: 1px solid black;
-
+    
     width: 100%;
     min-width: 200px;
     min-height: 110px;
@@ -20,6 +20,40 @@
 
     text-align: left;
 
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: #FFA6A6; /* 호버 효과에 따른 배경색 변경 */
+        color: #C8FFFF;
+    }
+
+    // * ---- 애니메이션 ------- //
+    opacity : 0;
+    position: relative;
+
+    animation: petComponent 1s running forwards; // 이름 / 유지시간 / 실행/ 애니메이션 끝난뒤 계속 유지
+
+    /* 키프레임 이름 = 애니메이션 이름 */
+    @keyframes petComponent {
+        0% {
+            
+            opacity : 0; // 에니메이션 투명하게
+            top:-40px;
+            // left:100%;
+            // left: -100px;
+        }
+        100% {
+            top:0px;
+            // left:0px;
+            
+            opacity: 1; // 애니메이션 선명하게
+            // left: 0px;
+            
+        }
+    }
+    // * --------------------- //
+
+    cursor: pointer;
     // 이미지 부분 
     >div:nth-child(1){
         // background-color: #FFB0B0;

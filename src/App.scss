@@ -1,3 +1,12 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&family=Poor+Story&display=swap');
+// 프리텐다느
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+/*
+font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+*/
+
+
 .screen{
     box-sizing: border-box;
     margin: 0px;
@@ -6,7 +15,8 @@
     
     min-width: 375px;
     min-height: 812px;
-    
+    font-family: "Poor Story", system-ui;
+    // font-family: "Pretendard Variable",Pretendard;
     position: relative;
     // 가운대 정렬
     display: flex;

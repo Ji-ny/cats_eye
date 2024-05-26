@@ -1,3 +1,8 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+/*
+font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+*/
+
 .screen_Login{
     box-sizing: border-box;
     
@@ -13,8 +18,15 @@
     // background-color: #334155;
 
 
-    background-image: linear-gradient( #FFFFFF, #FFA6A6); /* 그라데이션 */
-
+    // background-image: linear-gradient( #FFFFFF, #FFA6A6); /* 그라데이션 */
+    // 고양이 눈 건강 진료 / 챗봇 서비스
+    .subtitle_Login{
+        // 프리텐다드
+        font-family: "Pretendard Variable",Pretendard;
+        color: #000000;   
+        margin-top: 5px;
+        font-size: 1rem;
+    }
     .btn_login{
         padding-top: 20px;
         cursor: pointer;

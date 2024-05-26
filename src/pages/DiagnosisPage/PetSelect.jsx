@@ -79,7 +79,7 @@ function PetSelect({setLevel}){
             
                 <section className="container_petSelect">
                     {petList?.map((value, index) => ( // ! 일단, TempPetList 데이터 수에 따라, 데이터가 나타나게 했다
-                        <PetComponent onClick={onPetSelect} key={index} pet={value}/> // todo 클릭시, queryString으로 선택된 동물 이름 넘기고 , navigate로 이동시켜야할듯 
+                        <PetComponent index = {index} onClick={onPetSelect} key={index} pet={value}/> // todo 클릭시, queryString으로 선택된 동물 이름 넘기고 , navigate로 이동시켜야할듯 
                     ))}
                 </section>
 
