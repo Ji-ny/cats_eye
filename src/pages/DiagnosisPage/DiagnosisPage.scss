@@ -14,7 +14,10 @@
     // justify-content: center; 
 
     // column-gap: 20px;
-
+    // 반응형
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
     // 동물 사진 추가, 진단하기 컨테이너
     .container_DiagnosisImgUpload{
         box-sizing: border-box;

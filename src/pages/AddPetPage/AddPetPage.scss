@@ -16,6 +16,11 @@
 
     column-gap: 20px;
 
+    // 반응형
+    @media screen and (min-width: 1024px){
+        max-width:900px;
+    }
+
     .container_pet-form{
         box-sizing: border-box;
         padding: 5px;

@@ -3,7 +3,8 @@ import NavBar from "../../components/NavBar/NavBar";
 import "./ChatBotPage.scss";
 import axios from "axios";
 import send_img from "../../images/send_img.svg";
-import { TitleDefault } from "../../styles/styles_custom";
+import { DefaultBlutButton, TitleDefault } from "../../styles/styles_custom";
+import defaultAxios from "../../apis/defaultAxios";
 
 // ! 챗봇상담 페이지
 function ChatBotPage(){
@@ -14,7 +15,6 @@ function ChatBotPage(){
     
     // --------------------------- //
 
-    const BASE_URL = `http://ec2-13-209-162-245.ap-northeast-2.compute.amazonaws.com:8080`;
     // ------------  메세지 [전송 버튼] --------------- //
     
     const [ message, setMessage ] = useState('') // 현재 보낼 메세지   
@@ -25,14 +25,16 @@ function ChatBotPage(){
     }
     
     
+
+    // *메세지 전송 함수  --------------- //
     const postChatSendMessage = async () => {
         addMessage('user', message); // 내 메세지 전송
         setMessage('');
-
+        
         try{
-            const url = "ttp://ec2-13-209-162-245.ap-northeast-2.compute.amazonaws.com:8080/api/v1/chat";
+            const url = "/api/v1/chat";
 
-            const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
+            // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
 
             // 메세지 전송 데이터 (수정)
             const data = {
@@ -42,8 +44,8 @@ function ChatBotPage(){
             // console.log(data);
             setLoading(true); // 로딩중
     
-            const response = await axios.post(url, data, {headers,});
-            console.log(response);
+            const response = await defaultAxios.post(url, data);
+            console.log('성공 /api/v1/chat:', response);
 
             const aiMessage = response.data?.result.message || 'No response'; // ai 응답 저장
             console.log("성공",response);
@@ -55,15 +57,36 @@ function ChatBotPage(){
             console.error("오류 발생!", error);
             addMessage("오류 발생!");
         } finally {
-            console.log("항상 실행되는,");
+            // console.log("항상 실행되는,");
             setLoading(false); // 로딩 안됨
         }
 
     }
 
+    // * ------------------------------ //
+
     // useEffect(()=>{
     //     console.log(message);
     // },[message])
+
+    // ** 채팅방 삭제
+    const removeChat =async () => {
+        try{
+            // 메세지 큐에 메세지가 하나라도 있다면, 채팅방 삭제
+            if (messages.length > 0) {
+                const url = "/api/v1/chat/remove";
+
+                const response = await defaultAxios.patch(url);
+                setMessages([]); // 빈 메세지로 변경
+                console.log('성공 /api/v1/chat/remove:', response);
+            }
+        }    
+        catch(error){
+            console.error("오류 발생!", error);
+        }
+
+    }
+    
 
     return(
         <div className="screen_ChatBotPage">
@@ -90,8 +113,8 @@ function ChatBotPage(){
                     
             </div> 
 
-            {/* 네비바 */}
-            <NavBar/>
+            {/* //todo네비바 클릭시, 채팅방 식제! (메세지가 하나라도 있다면)*/}
+            <NavBar onClick = {removeChat}/>
         </div>
     );
 }

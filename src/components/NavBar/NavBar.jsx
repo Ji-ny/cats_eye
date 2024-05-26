@@ -9,11 +9,11 @@ import useNavigates from "./useNavigates";
 
 // ! 네비바. 
 // * 각각 챗봇 / 메인 / 지도 / 마이페이지로 이동 가능하다.
-function NavBar(){
+function NavBar({onClick}){
     const {goChatBotPage, goMainPage, goMapPage, goMyPage} = useNavigates();
 
     return(
-        <div className="screen_NavBar">
+        <div onClick = {onClick} className="screen_NavBar">
             <section className="container_NavBar">
                 <div className="item_NavBar">
                     <img src={chatBot_img} alt="챗봇" onClick={goChatBotPage}/>
