@@ -20,18 +20,25 @@ export const LineDiv = styled.div`
     font-size: 0.8rem;
     color: #4A4A4A;
     cursor: pointer;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: #FFA6A6; /* 호버 효과에 따른 배경색 변경 */
+        color: #C8FFFF; // #FFD3D3
+    }
 `;
 
 // * 캣츠아이 : 핑크색 타이틀
 export const  TitlePink = styled.div`
     box-sizing: border-box;
-    padding: 10px;
+    padding: 15px;
 
     font-size: 2.5rem; // 25px
     font-weight: bold;
     color: #FFA6A6;
     text-align: center;
-    line-height: 2rem;
+    line-height: 2.5rem;
 
     display: flex;
     justify-content: center;

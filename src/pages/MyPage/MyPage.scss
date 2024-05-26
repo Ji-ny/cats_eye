@@ -37,6 +37,7 @@
         .myinfo__body{
             box-sizing: border-box;
             border : 1px solid #FFA6A6;
+            background-color: #FFD3D3;
             border-radius: 15px;
             height: 100%;
             
@@ -54,7 +55,7 @@
             
         
             // 이미지 부분 
-            >img{
+            img{
                 // background-color: #FFB0B0;
                 border-radius: 100%;
                 box-sizing: border-box;
@@ -83,6 +84,7 @@
                     font-weight: bold;
                     margin-top: 5px;
                     cursor: pointer;
+                    
                 }
             }
 
@@ -153,14 +155,12 @@
                 // 삭제 버튼
                 .myingo__btn-remove{
                     position: absolute;
-                    top: 5px;
+                    // top: 5px;
                     right: 5px;
                     // margin-left: auto;
                     // margin-right: auto;
                     // top: 40px;
 
-                    
-                    //todo : 삭제 위치 조정.
                     background-color: #FFA6A6;
                     box-sizing: border-box;
                     padding: 5px;
@@ -171,6 +171,29 @@
                     font-weight: bold;
                     margin-top: 5px;
                     cursor: pointer;
+                    z-index: 1; /// 앞에 위치하도록
+                    // * ---- 애니메이션 ------- //
+                    opacity : 0;
+                    animation: petComponent 1s running forwards;
+                    
+
+                    /* 키프레임 이름 = 애니메이션 이름 */
+                    @keyframes petComponent {
+                        0% {
+                            opacity : 0; // 에니메이션 투명하게
+                            top:-40px;
+                            // left:100%;
+                            // left: -100px;
+                        }
+                        100% {
+                            top:5px;
+                            // left:0px;
+                            opacity: 1; // 애니메이션 선명하게
+                            // left: 0px;
+                            
+                        }
+                    }
+                    // * --------------------- //
                 }
             }
 
