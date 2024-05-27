@@ -38,10 +38,11 @@ function ShowMap(){
 
     // const [hospitalData, setHospitalData]  = useState([]); // 병원 위치 데이터
 
-    const [markerData,setMarkerData] =useState( [] )
+    const [markerData,setMarkerData] =useState( [] ) // 마커들 데이터
+    const [nearMarkerData, setNearMarkerData] = useState([]); // 내 위치 근처 마커 데이터.
 
 
-    // **지도 데이터 조회 --------- //
+    // ! (안씀 ) 전체 지도 데이터 조회 --------- //
     const getMarkers = async () => {
         const URL = `/api/v1/marker`;
         // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
@@ -61,27 +62,64 @@ function ShowMap(){
 
     }
 
-// // todo. 현재위치 이상하게 찍히는것도 해결해야함
-    useEffect(()=>{
-        getMarkers(); // 마커 먼저 위치 받고.       
-    },[]);
 
-    useEffect(()=>{
+    // ** 내 위치 기반 근처 지도 데이터 //
+    const getNearMarkers = async (lng, lat) => {
+        const URL = `/api/v1/marker/near?lat=${lat}&lng=${lng}`;
+        // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
+        
+        try{
+            const response = await defaultAxios.get( URL);
+            console.log('성공 /api/v1/marker/near response : ', response);
 
-        // 마커 위치가 여러개라면!
-        if (markerData.length>0){
-            getCurrentPos(); // 현재 위치 받기
+            // userInfo 업데이트
+            setNearMarkerData(response.data.result);
+            // console.log(userInfo);
+        }    
+        catch(error){
+            console.error("오류 발생!", error);
+            // console.log(error.response);
         }
+
+    }
+
+// // todo. 현재위치 이상하게 찍히는것도 해결해야함
+// ** 전체 마커를 받는 API ** //
+    // useEffect(()=>{
+    //     getMarkers(); // 마커 먼저 위치 받고.       
+    // },[]);
+
+    // useEffect(()=>{
+
+    //     // 마커 위치가 여러개라면!
+    //     if (markerData.length>0){
+    //         getCurrentPos(); // 현재 위치 받기
+    //     }
         
         
-    },[markerData]);
+    // },[markerData]);
 
 
-    useEffect(()=>{
-        console.log(myLatitude,myLongitude)
-    },[myLatitude,myLongitude]
-    )
+    // useEffect(()=>{
+    //     console.log(myLatitude,myLongitude)
+    // },[myLatitude,myLongitude]
+    // )
+// ** --------------------- ** //
 
+
+// ** 현재 내 위치 주변 마커를 받는 API ** //
+
+useEffect(()=>{
+    getCurrentPos(); // 마커 먼저 위치 받고.      
+    // getNearMarkers();
+},[]);
+
+// 현재 위치를 받는다면, 주위 마커도 받는다.
+useEffect(()=>{
+    getNearMarkers(myLongitude,myLatitude);
+},[myLatitude,myLongitude])
+
+// ** --------------------------//
 
     
     
@@ -128,7 +166,8 @@ function ShowMap(){
             </div>
         </MapMarker>
 
-        {markerData?.map((marker, index) => (
+{/* nearMarkerData : 근처  / markerData : 전체*/}
+        {nearMarkerData?.map((marker, index) => (
 
         <MapMarker 
             key = {index}
