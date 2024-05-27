@@ -8,50 +8,50 @@ const useNavigates = () => {
 
 
     // 현재 위치와 path가 같지 않다면, 이동!
-    const navigateIfNotCurrent = (path) => {
-        if (location.pathname !== path) {
-            navigate(path);
-        }
-    };
+    // const navigateIfNotCurrent = (path) => {
+    //     if (location.pathname !== path) {
+    //         navigate(path);
+    //     }
+    // };
 
     // 동물 추가하기
     const goAddPet = () => {
-        navigateIfNotCurrent("/addpet");
+        navigate("/addpet");
     };
 
         // 챗봇으로 이동 
     const goChatBotPage = () => {
-        navigateIfNotCurrent('/chatbot');
+        navigate('/chatbot');
     }
 
     // 메인 페이지로 이동 
     const goMainPage = () => {
-        navigateIfNotCurrent('/');
+        navigate('/');
     }
 
     // 지도 페이지로 이동 
     const goMapPage = () => {
-        navigateIfNotCurrent('/map');
+        navigate('/map');
     }
 
     // 마이페이지로 이동 
     const goMyPage = () => {
-        navigateIfNotCurrent('/mypage');
+        navigate('/mypage');
     }
 
     // 마이페이지로 이동 
     const goLogin = () => {
-        navigateIfNotCurrent('/login');
+        navigate('/login');
     }
 
     // 진단하기로 이동 
     const goDiagnosis = () => {
-        navigateIfNotCurrent('/diagnosis'); 
+        navigate('/diagnosis'); 
     }
 
     // 진단내역 조회로 이동 
     const goDiagnosisDB = () => {
-        navigateIfNotCurrent('/diagnosis_history'); 
+        navigate('/diagnosis_history'); 
     }
     // 다른 네비게이션 함수들도 여기에 추가할 수 있습니다
     // 예: const goHome = () => { navigate("/home"); };

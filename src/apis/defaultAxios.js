@@ -66,7 +66,7 @@ const resetTokenAndReattemptRequest = async ( originalRequest ) => { // original
             // todo : redux 로그인 상태를 false로 넣어준다.
             // 로그인으로 이동.
             alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
-            window.location.href = 'http://localhost:3000/login';
+            window.location.href = `${window.location.origin}/login`; //http://localhost:3000 자동 지정
         } 
         console.error('재시도 중 오류 발생!', retryError);
         
