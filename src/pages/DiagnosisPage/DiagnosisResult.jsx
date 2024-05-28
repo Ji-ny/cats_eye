@@ -6,14 +6,15 @@ import NavBar from "../../components/NavBar/NavBar";
 import useNavigates from "../../components/NavBar/useNavigates";
 
 // ! 진단 결과 페이지
-function DiagnosisResult({setLevel}){
+// 레벨. 선택된 이미지, 진단결과
+function DiagnosisResult({setLevel, selectedImgPreview ={testImg} , diagnosisResult}){
     //setLevel :  다시하기 / 
 
     // todo : 인근병원찾기 , 챗봇클릭시 다른 페이지로 가는데, 다시 돌아갈 수 있어야 할듯
 
-    const [petName, setPetName] = useState('달달'); // 펫 이름
-    const [isNormal , setIsNormal] = useState('정상'); // 정상(true)/비정상(false)
-    const [diagnosisDate, setDiagnosisDate] = useState('20xx.xx.xx') // 날짜
+    // const [petName, setPetName] = useState('달달'); // 펫 이름
+    // const [isNormal , setIsNormal] = useState('정상'); // 정상(true)/비정상(false)
+    // const [diagnosisDate, setDiagnosisDate] = useState('20xx.xx.xx') // 날짜
 
 
     // * 네비게이트 함수
@@ -30,7 +31,7 @@ function DiagnosisResult({setLevel}){
 
         <section className="container_DiagnosisResult">
             <LineDiv>
-                <img className="diagnosis_result_img"src={testImg} alt="진단결과 이미지"/>
+                <img className="diagnosis_result_img"src={selectedImgPreview} alt="진단결과 이미지"/>
             </LineDiv>
 
             <div className="diagnosis_result_contents">
@@ -39,10 +40,10 @@ function DiagnosisResult({setLevel}){
                 </div>
                 <li className="result_li">
                     {/* 정상이면 red, 비장상이면 blue */}
-                    <span>{petName}</span>이는 <span>{isNormal}</span>입니다.
+                    <span>{diagnosisResult.petName}</span>(이)는 <span>{diagnosisResult.result === "NORMAL" ? "정상" : "비정상"}</span>입니다.
                 </li>
                 <li className="result_li">
-                    날짜 : {diagnosisDate}
+                    날짜 :  {diagnosisResult.time}
                 </li>
 
             </div>

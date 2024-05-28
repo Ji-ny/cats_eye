@@ -63,11 +63,11 @@ function MainPage(){
             <TitlePink>Cat's eye</TitlePink>
 
             <div className="container_MainPage">
-                <LineDiv onClick={goDiagnosis}>
+                <LineDiv className="main_div" onClick={goDiagnosis} >
                     <img src={diagnosis_img} alt="진단하기 이미지"></img>
                     <div>진단하기</div>
                 </LineDiv>
-                <LineDiv  onClick={goDiagnosisDB}>
+                <LineDiv   className="main_div" onClick={goDiagnosisDB} style={{ animationDelay: `0.2s` }}>
                     <img src={diagnosis_db_img} alt="진단내역 조회 이미지"></img>
                     <div>진단 내역 조회</div>
                 </LineDiv>

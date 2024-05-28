@@ -15,17 +15,17 @@ function NavBar({onClick}){
     return(
         <div onClick = {onClick} className="screen_NavBar">
             <section className="container_NavBar">
-                <div className="item_NavBar">
-                    <img src={chatBot_img} alt="챗봇" onClick={goChatBotPage}/>
+                <div className="item_NavBar" onClick={goChatBotPage}>
+                    <img src={chatBot_img} alt="챗봇" />
                 </div>
-                <div className="item_NavBar">
-                    <img src={main_img} alt="메인"   onClick={goMainPage}/>
+                <div className="item_NavBar" onClick={goMainPage}>
+                    <img src={main_img} alt="메인"   />
                 </div>
-                <div className="item_NavBar">
-                    <img src={map_img} alt="지도"  onClick={goMapPage}/>
+                <div className="item_NavBar" onClick={goMapPage}>
+                    <img src={map_img} alt="지도"  />
                 </div>
-                <div className="item_NavBar">
-                    <img  src={myPage_img} alt="마이페이지" onClick={goMyPage}/>
+                <div className="item_NavBar"  onClick={goMyPage}>
+                    <img  src={myPage_img} alt="마이페이지"/>
                 </div>
             </section>
 

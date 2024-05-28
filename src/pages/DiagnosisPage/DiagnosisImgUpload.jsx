@@ -6,7 +6,7 @@ import FileUpload from "../../components/FileUpload/FileUpload"
 import "./DiagnosisImgUpload.scss";
 import NavBar from "../../components/NavBar/NavBar";
 
-function DiagnosisImgUpload({level, setLevel}){
+function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDiagnosisResult }){ // 레벨, 이미지 프리뷰선택된 펫정보, 저장할 정상유뮤()
 
     const [postImg, setPostImg] = useState([]); // 서버로 전송할 img
     const [previewImg, setPreviewImg] = useState([]) // 선택된 미리보기 img
@@ -20,8 +20,12 @@ function DiagnosisImgUpload({level, setLevel}){
         }else{ // 이미지가 업로드 되어 있다면,
             // todo 어떻게 다음 컴포넌트로 결과를 넘길 것인가?
             setLevel(3); // 레벨을 3으로 올린다. // => 진단결과 페이지로 이동한다. // todo 이 방법도 다시 생각해야함
-            console.log(level);
-            // todo axios로 서버에게 이미지를 넘기자.
+
+            // todo axios로 서버에게 이미지를 넘기자. (ㄴselected 펫으로 펫 식별자를 꺼내오자.)
+            // todo setDiagnosisResult로 진단 결과를 저장하자. ()
+            // preview이미지럴 넘겨주자.
+            setSelectedImgPreview(previewImg);
+            
         }
 
 
