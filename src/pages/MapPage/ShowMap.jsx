@@ -162,7 +162,7 @@ useEffect(()=>{
         <MapMarker position={{ lat : myLatitude, lng : myLongitude }}> 
             <div style={{ color: "#ff0000"}} >  
                     <div>  현재 내 위치 </div>
-                    <div> lat : {myLatitude}, lan : {myLongitude}</div>
+                    {/* <div> lat : {myLatitude}, lan : {myLongitude}</div> */}
             </div>
         </MapMarker>
 

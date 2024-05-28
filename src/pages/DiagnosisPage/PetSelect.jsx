@@ -10,7 +10,7 @@ import defaultAxios from "../../apis/defaultAxios";
 import { useEffect, useState } from "react";
 
 
-function PetSelect({setLevel}){
+function PetSelect({setLevel, setSelectedPet}){
 
     // 동물 추가하기 페이지로 이동한다.
 
@@ -22,9 +22,11 @@ function PetSelect({setLevel}){
     // ** ===================== // 
 
     // todo : 진단 동물 선택 : 진단할 동물 개수로 진단하기 페이지로 넘어간다.
-    const onPetSelect = () => {
+    const onPetSelect = (pet) => {
         setLevel(2); // 진단하기 페이지 (레벨2로 넘어간다.)
-        // todo 현재 선택된 동물의 이름을 기억해야한다.
+        // *현재 선택된 동물의 이름을 기억한다..
+        setSelectedPet(pet); 
+        console.log("선택된 펫:", pet);
     }
 
 
@@ -79,7 +81,7 @@ function PetSelect({setLevel}){
             
                 <section className="container_petSelect">
                     {petList?.map((value, index) => ( // ! 일단, TempPetList 데이터 수에 따라, 데이터가 나타나게 했다
-                        <PetComponent index = {index} onClick={onPetSelect} key={index} pet={value}/> // todo 클릭시, queryString으로 선택된 동물 이름 넘기고 , navigate로 이동시켜야할듯 
+                        <PetComponent index = {index} onClick={()=>{onPetSelect(value)}} key={index} pet={value}/> // todo 클릭시, queryString으로 선택된 동물 이름 넘기고 , navigate로 이동시켜야할듯 
                     ))}
                 </section>
 

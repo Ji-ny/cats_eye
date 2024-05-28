@@ -197,7 +197,7 @@ function MyPage(){
                     {/* //펫리스트 맵을 넣어줌 */}
                     {petList.map((value, index) => (
                         <div className="pet-list__component">
-                            <button style={{ animationDelay: `${index * 0.3}s` }} className="myingo__btn-remove"  onClick = {()=>{ handlePetRemove(value?.perId)}}>삭제 </button>
+                            <button style={{ animationDelay: `${index * 0.2}s` }} className="myingo__btn-remove"  onClick = {()=>{ handlePetRemove(value?.perId)}}>삭제 </button>
                             <PetComponent index={index}  key={index} pet={value}/>
                         </div>
                         

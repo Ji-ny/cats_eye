@@ -13,12 +13,12 @@ function DiagnosisHistoryPage(){
 
     // 동물 진단 리스트
     const [diagnosisHistoryList, setDiagnosisHistoryList] = useState([
-        {
-            diagnosisImageUrl : testImg,
-            time : "0000.00.00",
-            name: "OO이",
-            diagnosisResult : "정상"
-        }
+        // {
+        //     diagnosisImageUrl : testImg,
+        //     time : "0000.00.00",
+        //     name: "OO이",
+        //     diagnosisResult : "정상"
+        // }
     ]);
     
 

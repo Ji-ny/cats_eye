@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
     // 기본 사진 + 글자 + 검정라인 버튼
 export const LineDiv = styled.div`
     box-sizing: border-box;
@@ -31,6 +30,7 @@ export const LineDiv = styled.div`
 
 // * 캣츠아이 : 핑크색 타이틀
 export const  TitlePink = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&family=Poor+Story&display=swap');
     box-sizing: border-box;
     padding: 15px;
 
@@ -39,7 +39,8 @@ export const  TitlePink = styled.div`
     color: #FFA6A6;
     text-align: center;
     line-height: 2.5rem;
-
+    
+    font-family: "Poor Story", system-ui;
     display: flex;
     justify-content: center;
     align-items: center;
