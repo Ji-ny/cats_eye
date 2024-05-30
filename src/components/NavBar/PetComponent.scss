@@ -7,7 +7,7 @@
     min-width: 200px;
     min-height: 110px;
     max-height: 180px;
-    height: 100%;
+    // height: 100%;
 
     column-gap: 10px;
     
@@ -58,17 +58,24 @@
     >div:nth-child(1){
         // background-color: #FFB0B0;
         border-radius: 100%;
-        height: 80%;
+        width: auto;
+        height: 80%; // 부모 요소의 높이를 기준으로 설정
+        aspect-ratio: 1; // 정사각형 비율 유지
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; // 이미지가 영역을 넘지 않도록 숨김
         box-sizing: border-box;
         // 이미지 
         >img{
             width: 100%;
             height: 100%;
-            border-radius: 100%;
+            object-fit: cover; // 이미지가 영역을 꽉 채우도록 설정
+            border-radius: 50%;
         }
         // padding: 10px;
     }
-
     // 각 설명 글씨 컨테이너 (종, 이름, 등)
     >div:nth-child(2){
         display: flex;
@@ -77,15 +84,35 @@
         align-items: start;
         list-style: none; // *스타일을 없애준다. (점을 없앰)
         box-sizing: border-box;
+        overflow-x: scroll;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         // padding-right: auto;
         width: 100%;
         // 각각 li 부분에 별을 넣어준다.
+
         >li::before{
             box-sizing: border-box;
             content: "⭐ ";
             padding-left: 10px; // 왼쪽에 조금 옮겨줌
+            
 
         }
+
+        //*------------ 스크롤바 설정 -------------- //
+        &::-webkit-scrollbar{
+            width: 5px; // 스크롤나 너비
+            height : 2px; // 스크롤바 높이 
+        }
+    
+        // 스크롤 막대
+        &::-webkit-scrollbar-thumb{
+            background-color:  hsla(357, 100%, 79%, 0.5);
+            
+        
+        } 
+        
+        //*------------ 스크롤바 설정 -------------- //
     }
 }
 

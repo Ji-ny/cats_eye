@@ -1,5 +1,5 @@
 import { DefaultBlutButton, LineDiv, SubTitleDefault, TitleDefault } from "../../styles/styles_custom";
-import testImg from "../../images/test_img.jpg"; // 테스트 이미지
+import testImg from "../../images/testingImages/youbu_test5.jpg"; // 테스트 이미지
 import "./DiagnosisResult.scss";
 import { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
@@ -31,7 +31,8 @@ function DiagnosisResult({setLevel, selectedImgPreview ={testImg} , diagnosisRes
 
         <section className="container_DiagnosisResult">
             <LineDiv>
-                <img className="diagnosis_result_img"src={selectedImgPreview} alt="진단결과 이미지"/>
+                <img className="diagnosis_result_img" src={testImg } alt="진단결과 이미지"/>
+                {/* // todo. testImg 나중에 selectedImgPreview로 바꿔줄것. */}
             </LineDiv>
 
             <div className="diagnosis_result_contents">
@@ -40,15 +41,15 @@ function DiagnosisResult({setLevel, selectedImgPreview ={testImg} , diagnosisRes
                 </div>
                 <li className="result_li">
                     {/* 정상이면 red, 비장상이면 blue */}
-                    <span>{diagnosisResult.petName}</span>(이)는 
-                    <span style={diagnosisResult.result==="NORMAL" ? {color:"blue"} : {color:"red"}}> {diagnosisResult.result === "NORMAL" ? "정상" : "비정상"} </span>
+                    <span style={{color:"#FFA6A6" , fontWeight:"bold"}}>{diagnosisResult.petName}</span>(이)는 
+                    <span style={diagnosisResult.result==="NORMAL" ? {color:"blue", fontWeight:"bold"} : {color:"red", fontWeight:"bold"}}> {diagnosisResult.result === "NORMAL" ? "정상" : "비정상"} </span>
                     입니다.
                 </li>
                 <li className="result_li">
-                    날짜 :  {new Date(diagnosisResult?.time).toISOString().split('T')[0]}
+                    날짜 :  {diagnosisResult?.day}
                 </li>
                 <li className="result_li">
-                    시간 :  {new Date(diagnosisResult?.time).toISOString().split('T')[1].slice(0, 5)}
+                    시간 :  {diagnosisResult?.time}
                 </li>
 
             </div>
@@ -56,7 +57,7 @@ function DiagnosisResult({setLevel, selectedImgPreview ={testImg} , diagnosisRes
             <div style={{flex:"0.9"}}></div>
 {/* //todo 임의로 레벨 바꿔둠  */}
             <DefaultBlutButton onClick={ handleResetDiagnosis}style={{backgroundColor:"#FFB0B0"}}>다시하기</DefaultBlutButton>
-            <DefaultBlutButton onClick= {goMapPage}>인근 병원 찾기</DefaultBlutButton>
+            <DefaultBlutButton onClick= {goMapPage}>인근 동물 병원/약국 찾기</DefaultBlutButton>
             <DefaultBlutButton onClick = {goChatBotPage}>챗봇상담</DefaultBlutButton>
 
 

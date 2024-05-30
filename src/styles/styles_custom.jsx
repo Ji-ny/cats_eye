@@ -55,7 +55,7 @@ export const  TitlePink = styled.div`
 export const  TitleDefault = styled.div`
     box-sizing: border-box;
     padding: 10px;
-
+    min-height: 150px;
     font-size: 2rem; // 25px
     font-weight: bold;
     color: #000000;
@@ -64,7 +64,7 @@ export const  TitleDefault = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 50px;
+    min-height: 100px;
     /* height: 10%; */
     width: 100%;
 
@@ -115,6 +115,7 @@ export const DefaultBlutButton = styled.div`
 
     cursor: pointer;
 
+    
 `
 
 

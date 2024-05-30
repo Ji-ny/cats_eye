@@ -10,8 +10,8 @@
     align-items: center;
 
     column-gap: 20px;
-
     background-color: #F5F4F1;
+    
 
     // 반응형
     @media screen and (min-width: 1024px){
@@ -34,44 +34,93 @@
         row-gap: 15px;
         
         font-size: 1rem;
+
+
         
+        //*------------ 스크롤바 설정 -------------- //
+        &::-webkit-scrollbar{
+            width: 8px; // 스크롤나 너비
+            height : 5px; // 스크롤바 높이 
+        }
+    
+        // 스크롤 막대
+        &::-webkit-scrollbar-thumb{
+            background-color:  hsla(357, 100%, 79%, 0.5);
+            
+        
+        } 
+        
+        //*------------ 스크롤바 설정 -------------- //
         // * 각각 진단내역 요소
         .diagnosis_element{
             box-sizing: border-box;
             border-radius: 15px;
             border: 1px solid black;
+            // background-color: rgb(255, 250, 250);
 
             width: 95%;
             // height: 100%;
+            // height: 100%;
             min-width: 200px;
-            // min-height: 110px;
+            min-height: 110px;
+            max-height: 20%;
             
 
             display: grid;
             grid-template-columns: 1fr 2fr;
 
             place-items: center;
-            padding: 20px;
+            padding: 10px;
 
             text-align: left;
 
+            // * ---- 애니메이션 ------- //
+            opacity : 0;
+            position: relative;
+
+            animation: petComponent 0.7s running forwards; // 이름 / 유지시간 / 실행/ 애니메이션 끝난뒤 계속 유지
+
+            /* 키프레임 이름 = 애니메이션 이름 */
+            @keyframes petComponent {
+                0% {
+                    
+                    opacity : 0; // 에니메이션 투명하게
+                    top:-30px;
+                    // left:100%;
+                    // left: -100px;
+                }
+                100% {
+                    top:0px;
+                    // left:0px;
+                    
+                    opacity: 1; // 애니메이션 선명하게
+                    // left: 0px;
+                    
+                }
+            }
+            // * --------------------- //
 
             // 진단 내역의 이미지 부분  
             >div:nth-child(1){
-                // background-color: #FFB0B0;
-                border-radius: 100%;
-                height: 100%;
-                box-sizing: border-box;
+                width: auto;
+                height: 100%; // 부모 요소의 높이를 기준으로 설정
+                aspect-ratio: 1; // 정사각형 비율 유지
                 background-color: #FFB0B0;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden; // 이미지가 영역을 넘지 않도록 숨김
+                box-sizing: border-box;
+                
                 // 이미지 
                 >img{
-                    
                     width: 100%;
                     height: 100%;
+                    object-fit: cover; // 이미지가 영역을 꽉 채우도록 설정
+                    border-radius: 50%;
                 }
-                // padding: 10px;
             }
-        
             // 각 진단 내역 글씨 컨테이너 (날짜, 이름, 검사 결과)
             >div:nth-child(2){
                 display: flex;

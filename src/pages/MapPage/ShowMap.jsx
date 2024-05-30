@@ -8,6 +8,7 @@ import markerHospitalImg from '../../images/marker_hospital.png';
 import defaultAxios from '../../apis/defaultAxios';
 import { useSelector } from 'react-redux';
 import useNavigates from '../../components/NavBar/useNavigates';
+import Swal from 'sweetalert2';
 
 // ! 지도 보여주는 컴포넌트 ! 
 
@@ -39,7 +40,11 @@ function ShowMap(){
                 setMyLatitude(pos.coords.latitude); // 위도 업데이트
                 setMyLongitude(pos.coords.longitude); // 경도 업데이트
             },
-            () => alert("위치 정보를 가져오는데 실패했습니다."), //실패시
+            () => {          // * 모달 
+                Swal.fire({
+                    text: "위치 정보를 가져오는데 실패했습니다.",
+                    icon: "error"
+                })}, //실패시
             { // 속성.
                 enableHighAccuracy: true,
                 maximumAge: 30000,
@@ -62,7 +67,7 @@ function ShowMap(){
         
         try{
             const response = await defaultAxios.get( URL);
-            console.log('성공 /api/v1/marker response : ', response);
+            // console.log('성공 /api/v1/marker response : ', response);
 
             // userInfo 업데이트
             setMarkerData(response.data.result);
@@ -126,7 +131,11 @@ useEffect(() => {
     if (isLogin) { //}
         getCurrentPos(); // 마커 먼저 위치 받고.    
     } else{
-        alert('로그인이 필요합니다.');
+        // * 모달 
+        Swal.fire({
+            text: "로그인 후 이용해주세요.",
+            icon: "info"
+        });
         goLogin();
     }
 },[]);
@@ -157,8 +166,17 @@ useEffect(()=>{
             console.log('결과 데이터',response.data.result);
 
             // 병원 , 약국 디테일한 정보를 alert로 띄워준다.
-            const result = `- 이름 : ${response.data.result.facility}\n- 도로명 주소 : ${response.data.result.address}\n- 주소 : ${response.data.result.streetNameAddress}\n- 전화번호 : ${response.data.result.tel}`;
-            alert(result);
+            const result = `<div style="font-size: 1rem; text-align: left;">
+                            1. <strong style="font-size: 1.2rem;" >도로명 주소</strong><br> ${response.data.result.address}<br><br>
+                            2. <strong style="font-size: 1.2rem;" >주소</strong><br>  ${response.data.result.streetNameAddress}<br><br>
+                            3. <strong style="font-size: 1.2rem;" >전화번호</strong><br> ${response.data.result.tel}
+                            </div>`;
+            // * 모달 
+            Swal.fire({
+                title:`${response.data.result.facility}`,
+                html: result,
+            });
+            // alert(result);
 
         }    
         catch(error){

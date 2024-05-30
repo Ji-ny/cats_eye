@@ -7,6 +7,7 @@ import { DefaultBlutButton, TitleDefault } from "../../styles/styles_custom";
 import defaultAxios from "../../apis/defaultAxios";
 import { useSelector } from "react-redux";
 import useNavigates from "../../components/NavBar/useNavigates";
+import Swal from "sweetalert2";
 
 // ! 챗봇상담 페이지
 function ChatBotPage(){
@@ -104,21 +105,25 @@ function ChatBotPage(){
         if (isLogin) { //}
             // 로그인 되어있으면, 아무것도 하지 않는다.
         } else{
-            alert('로그인이 필요합니다.');
+            // * 모달 
+            Swal.fire({
+                text: "로그인 후 이용해주세요.",
+                icon: "info"
+            });
             goLogin();
         }
     },[]);
     
-
+// ${msg.sender === 'user' ? '' : ''} : } }
     return(
         <div className="screen_ChatBotPage">
-            <TitleDefault> 챗봇 페이지 </TitleDefault>         
+            <TitleDefault>고양이 눈 질병 챗봇</TitleDefault>         
             <div className='chat_output_container'>
                 {/* 만약, 로딩중이라면 로딩중 띄우고, 아니면, 답변 띄우기 */}
 
                 { messages.map((msg,index) => ( // 답변을 띄운다.
                 <div className = {`message ${msg.sender}`} key = {index}>
-                    {`${msg.sender === 'user' ? '나' : '챗봇'} : ${msg.message}`}
+                    {`${msg.message}`}
                 </div>
                 ))}    
 
