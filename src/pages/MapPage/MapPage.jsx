@@ -8,7 +8,7 @@ function MapPage(){
     
     return(
         <div className="screen_MapPage">
-            <TitleDefault >인근 병원 찾기</TitleDefault>
+            <TitleDefault >인근 동물병원/약국 찾기</TitleDefault>
             {/* 지도 컨테이너 */}
             <section className="container_map">
                 <ShowMap/>

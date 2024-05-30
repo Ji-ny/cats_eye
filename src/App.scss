@@ -13,13 +13,15 @@ font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFon
     height: calc(var(--vh,1vh)*100); // var() : Css변수를 가져오고, 값이 없을경우 기본값으로 1vh를 사용.
     
     min-width: 375px;
-    min-height: 812px;
+    // min-height: 768px;
     // font-family: "Poor Story", system-ui;
     font-family: "Pretendard Variable",Pretendard;
     position: relative;
     // 가운대 정렬
     display: flex;
     justify-content: center; // 가로 = 가운대정렬
+    
+
 
 
 }

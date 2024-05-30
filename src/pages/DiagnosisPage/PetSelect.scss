@@ -31,6 +31,22 @@
 
         flex: 1;
 
+
+        //*------------ 스크롤바 설정 -------------- //
+        &::-webkit-scrollbar{
+            width: 5px; // 스크롤나 너비
+            height : 5px; // 스크롤바 높이 
+        }
+    
+        // 스크롤 막대
+        &::-webkit-scrollbar-thumb{
+            background-color:  hsla(357, 100%, 79%, 0.5);
+            
+        
+        } 
+        
+        //*------------ 스크롤바 설정 -------------- //
+
         // 고양이발바닥 div (진단할 동물이 없습니다. 동물을 추가해주세요)
         .plus_pet_box{
             min-width : 330px;

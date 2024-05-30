@@ -10,6 +10,7 @@ import defaultAxios from "../../apis/defaultAxios";
 
 import { useSelector } from "react-redux";
 import useNavigates from "../../components/NavBar/useNavigates";
+import Swal from "sweetalert2";
 
 function DiagnosisHistoryPage(){
 
@@ -38,7 +39,7 @@ function DiagnosisHistoryPage(){
         
         try{
             const response = await defaultAxios.get( URL);
-            console.log('성공 /api/v1/diagnosis/search response : ', response);
+            // console.log('성공 /api/v1/diagnosis/search response : ', response);
 
             // userInfo 업데이트
             setDiagnosisHistoryList(response.data.result);
@@ -47,7 +48,11 @@ function DiagnosisHistoryPage(){
         catch(error){
             if (error.response.data.code === "4020"){
                 // console.log(error.response.data);
-                alert("진단내역이 없습니다.");
+                // * 모달 
+                Swal.fire({
+                    text: "진단내역이 없습니다.",
+                    icon: "info"
+                });
                 
             }
             else {
@@ -63,7 +68,11 @@ function DiagnosisHistoryPage(){
         if (isLogin) {
             getDiagnosisHistoryList();
         } else{
-            alert('로그인이 필요합니다.');
+            // * 모달 
+            Swal.fire({
+                text: "로그인 후 이용해주세요.",
+                icon: "info"
+            });
             goLogin();
         }
     },[]);
@@ -77,10 +86,10 @@ function DiagnosisHistoryPage(){
             <section className="container_diagnosis_db">
                 {diagnosisHistoryList?.map((value, index) => (
                     // * 사진
-                    <section key={index} className="diagnosis_element">
+                    <section style={{ animationDelay: `${index * 0.2}s` }} key={index} className="diagnosis_element">
                         <div><img src={value?.diagnosisImageUrl} alt="기존 진단 사진" /></div>
                         <div>
-                            <div>날짜 : {value?.time}</div>
+                            <div>날짜 : {value?.day}</div>
                             <div>이름 : {value?.name}</div>
                             <div>검사결과 : {value?.diagnosisResult}</div>
                         </div>

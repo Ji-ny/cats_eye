@@ -13,9 +13,10 @@ function DiagnosisPage(){
     const [selectedImgPreview, setSelectedImgPreview ] = useState(''); // 선택된 이미지 프리뷰
     const [diagnosisResult, setDiagnosisResult] = useState({  // 정상비정산 판결하기.
         "diagnosisId": 9,
-        "petName": "푸",
+        "petName": "유부",
         "result": "NORMAL",
-        "time": "2024-05-27T18:52:14.605431"}); // 정상인지 판별 (정상:  true, 비정상 : false)
+        "day" : "2024-05-27",
+        "time": "18:52"}); // 정상인지 판별 (정상:  true, 비정상 : false)
 
     return(
         <div className="screen_DiagnosisPage">

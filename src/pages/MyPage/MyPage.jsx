@@ -12,8 +12,9 @@ import { setIsLogin } from "../../store/store";
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from "react";
 import defaultAxios from "../../apis/defaultAxios";
+import CustomModal from "../../components/CustomModal/CustomModal";
 // process.env.REACT_APP_BASE_URL
-
+import Swal from "sweetalert2";
 
 function MyPage(){
     // ==== * 전역상태 관리 ====== //
@@ -44,6 +45,8 @@ function MyPage(){
 
     // },
     ]);
+
+    // * ----------------------------------------------------- //
     // ** ======================== //
 
 
@@ -58,18 +61,39 @@ function MyPage(){
         // 1. localSTroage를 지운다.
         localStorage.clear(); 
 
-        // 2. 로그인 상태를 false로 바꾼다.
-        dispatch(setIsLogin(false));
-        // 2. 로그인 화면으로 넘어간다..
-        goLogin();
-        console.log(' 로그아웃 : 현재 로그인 상태 : ', isLogin);
+        
+        
 
-        alert('로그아웃 되었습니다.');
+        // 모달을 띄운다.
+        // openModal('로그아웃 되었습니다.');
+
+        //alert를 띄운다.
+        Swal.fire({
+            icon: 'success',
+            text: '로그아웃 되었습니다.',
+            });
+        
+
+        goLogin();
+
+
+        dispatch(setIsLogin(false));
+
+
+        
+        
+
+        // console.log(' 로그아웃 : 현재 로그인 상태 : ', isLogin);
+        
     }
 
+
+    // useEffect(() => {
+    //     if (modalIsOpen === false && isLogin === false ) {
+    //         goLogin();
+    //     }
+    // }, [modalIsOpen, isLogin]);
     // ** 로그아웃 끝 ================//
-
-
 
 
         
@@ -86,9 +110,9 @@ function MyPage(){
             // userInfo 업데이트
             setUserInfo(
             {
-                email: response.data.result.email,
-                name: response.data.result.name,
-                image: response.data.result.profileUrl
+                email: response?.data?.result?.email,
+                name: response?.data?.result?.name,
+                image: response?.data?.result?.profileUrl
             });
             // console.log(userInfo);
         }    
@@ -115,45 +139,75 @@ function MyPage(){
             console.log('성공 getPetLis response : ', response);
 
             // setPetList(반려동물 목록) 업데이트
-            setPetList(response.data.result);
+            setPetList(response?.data?.result);
             console.log(response);
         }    
         catch(error){
-            if (error.response.data.code =="4010"){
-                alert("반려동물이 등록되어 있지 않습니다.");
+            if (error.response?.data?.code ==="4010"){
+                        // 모달을 띄운다.
+            Swal.fire({
+                text: '반려동물이 등록되어 있지 않습니다.',
+                icon: "info"
+            });                        // openModal('반려동물이 등록되어 있지 않습니다.');
+                // alert("반려동물이 등록되어 있지 않습니다.");
             }else{
                 console.error("오류 발생!", error);
+                
             }
             
         }
 
     }
+
+    useEffect(()=>{},[petList]);
     // ------------------------------ //
 
     // 내 반려동물 삭제하기
     const handlePetRemove = async (petId)  => {
 
-        if (window.confirm(`해당 반려동물을 삭제하시겠습니까?`) === true){    //삭제하는 경우, 삭제 메소드 실행
-            const URL =`/api/v1/pet/remove`;
-            // const data = {petId : petId}; // 삭제할 petId ()
-            // 폼 형식으로 만들어준다.
-            const formData = new FormData();
-            // formData.append("petId", new Blob([JSON.stringify(data)],{type : "application/json"})); 
-            formData.append("petId", JSON.stringify(petId));
+        Swal.fire({
+            icon: 'warning',
+            text: '해당 반려동물을 삭제하시겠습니까?',
+            showCancelButton: true,
+            confirmButtonText: '예', 
+            cancelButtonText: '아니오',
+            confirmButtonColor: '#429f50',
+            cancelButtonColor: '#d33',
+
+        }).then(async result => {
+            if (result.isConfirmed) {
+                const URL =`/api/v1/pet/remove`;
+                // const data = {petId : petId}; // 삭제할 petId ()
+                // 폼 형식으로 만들어준다.
+                const formData = new FormData();
+                // formData.append("petId", new Blob([JSON.stringify(data)],{type : "application/json"})); 
+                formData.append("petId", JSON.stringify(petId));
+        
+                try{
+                    await defaultAxios.patch(URL, formData);
+                    // console.log('삭제성공 /api/v1/pet/remove : ', response);
     
-            try{
-                const response = await defaultAxios.patch(URL, formData);
-                console.log('삭제성공 /api/v1/pet/remove : ', response);
-    
-                // setPetList(반려동물 목록) 다시 업데이트
-                getPetList();
-            }    
-            catch(error){
-                console.error("오류 발생!", error);
-            }
-        }else{
-            alert("삭제가 취소되었습니다.")
-        }
+                    // * 모달 
+                    Swal.fire({
+                        icon: 'success',
+                        text: '삭제되었습니다.',
+                        });
+                    
+                    // openModal('삭제되었습니다.');
+                    
+                    // setPetList(반려동물 목록) 다시 업데이트
+                    await getPetList();
+                }    
+                catch(error){
+                    console.error("오류 발생!", error);
+                    // alert(error);
+                }
+            } 
+
+        })
+
+
+
 
 
     }
@@ -169,12 +223,20 @@ function MyPage(){
         if (isLogin) { // 로그인이 되어 있다면!
             getAuthInfo(); // 사용자 정보를 받아온다.
             getPetList(); // 반려동물 데이터를 받아온다.
-        } else{
-            alert('로그인이 필요합니다.');
+        } else{            
+            // * 모달 
+            Swal.fire({
+                text: "로그인 후 이용해주세요.",
+                icon: "info"
+            });
+
+
+
             goLogin();
         }
     },[]);
  //
+
 
 
     return(
@@ -203,7 +265,7 @@ function MyPage(){
                 <div className="pet-list__body">
                     {/* //펫리스트 맵을 넣어줌 */}
                     {petList.map((value, index) => (
-                        <div className="pet-list__component">
+                        <div key={index} className="pet-list__component">
                             <button style={{ animationDelay: `${index * 0.2}s` }} className="myingo__btn-remove"  onClick = {()=>{ handlePetRemove(value?.perId)}}>삭제 </button>
                             <PetComponent index={index}  key={index} pet={value}/>
                         </div>

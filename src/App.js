@@ -9,6 +9,7 @@ import MyPage from "./pages/MyPage/MyPage";
 import AddPetPage from "./pages/AddPetPage/AddPetPage";
 import MapPage from "./pages/MapPage/MapPage";
 import DiagnosisPage from "./pages/DiagnosisPage/DiagnosisPage";
+import TestPage from "./pages/TestPage/TestPage";
 function App() {
 
       // ** =============뷰포트 높이 구하기 ===============** //
@@ -46,6 +47,7 @@ function App() {
         <Route path="/mypage" element={<MyPage/>}/>         {/* 마이페이지 */}
         <Route path="/addpet" element={<AddPetPage/>} />  {/* 반려동물 추가 */}
         <Route path="/map" element = {<MapPage/>} /> {/* 근저처 병원 페이지 */}
+        <Route path="test" element = {<TestPage/>}/>  {/* 테스트*/} 
       </Routes>
     </div>
 

@@ -8,6 +8,7 @@ import useNavigates from "../../components/NavBar/useNavigates";
 import FileUpload from "../../components/FileUpload/FileUpload";
 import defaultAxios from "../../apis/defaultAxios";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 
 
@@ -89,10 +90,18 @@ function AddPetPage(){
         try{
             const response = await defaultAxios.post( URL, formData);
             console.log('펫 추가하기 성공/pet/enroll response : ', response);
-            alert(`${name}이(가) 추가되었습니다.`);
+            // * 모달 
+            Swal.fire({
+                text: `${name}이(가) 추가되었습니다.`,
+                icon: "success"
+            });
         }    
         catch(error){
-            alert(`${name}이(가) 추가되지 않았습니다 (오류).`);
+            // alert();
+            Swal.fire({
+                text: `${name}이(가) 추가되지 않았습니다.`,
+                icon: "error"
+            });
             console.error("오류 발생!", error);
             // console.log(error.response);
         }
@@ -115,7 +124,12 @@ function AddPetPage(){
         if (isLogin) { //}
             // 로그인 되어있으면, 아무것도 하지 않는다.
         } else{
-            alert('로그인이 필요합니다.');
+            
+            // * 모달 
+            Swal.fire({
+                text: "로그인 후 이용해주세요.",
+                icon: "info"
+            });
             goLogin();
         }
     },[]);
