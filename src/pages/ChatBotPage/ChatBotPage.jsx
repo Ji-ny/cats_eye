@@ -5,10 +5,21 @@ import axios from "axios";
 import send_img from "../../images/send_img.svg";
 import { DefaultBlutButton, TitleDefault } from "../../styles/styles_custom";
 import defaultAxios from "../../apis/defaultAxios";
+import { useSelector } from "react-redux";
+import useNavigates from "../../components/NavBar/useNavigates";
 
 // ! 챗봇상담 페이지
 function ChatBotPage(){
 
+        // ==== * 전역변수 관리 ====== //
+    // * 전역 변수 받아오기 (로그인 상태)
+    const isLogin = useSelector(state => state.isLogin); // 전역 redux stroe 내의 isLogin을가져온다.
+
+    // ====================== //
+
+
+    // 네비게이트 함수
+    const { goDiagnosis, goDiagnosisDB , goLogin} = useNavigates();
     // --------- API 키 ---------- //
     const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
     const [loading, setLoading] = useState(false); // 로딩 대기 (true : 로딩중)
@@ -86,6 +97,17 @@ function ChatBotPage(){
         }
 
     }
+
+
+    // *로그인 확인 
+    useEffect(() => {
+        if (isLogin) { //}
+            // 로그인 되어있으면, 아무것도 하지 않는다.
+        } else{
+            alert('로그인이 필요합니다.');
+            goLogin();
+        }
+    },[]);
     
 
     return(

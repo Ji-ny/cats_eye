@@ -8,8 +8,17 @@ import testImg from "../../images/diagnosis_img.svg"
 import { useEffect, useState } from "react";
 import defaultAxios from "../../apis/defaultAxios";
 
+import { useSelector } from "react-redux";
+import useNavigates from "../../components/NavBar/useNavigates";
+
 function DiagnosisHistoryPage(){
 
+    // ==== * 전역변수 관리 ====== //
+    // * 전역 변수 받아오기 (로그인 상태)
+    const isLogin = useSelector(state => state.isLogin); // 전역 redux stroe 내의 isLogin을가져온다.
+    
+    // 네비게이트 함수
+    const { goLogin} = useNavigates();
 
     // 동물 진단 리스트
     const [diagnosisHistoryList, setDiagnosisHistoryList] = useState([
@@ -49,11 +58,16 @@ function DiagnosisHistoryPage(){
 
     }
     // -------------------------- //
+    // *로그인 확인 
+    useEffect(() => {
+        if (isLogin) {
+            getDiagnosisHistoryList();
+        } else{
+            alert('로그인이 필요합니다.');
+            goLogin();
+        }
+    },[]);
 
-    useEffect(()=>{
-        // 첫 렌더링시 동물진단정보받기
-        getDiagnosisHistoryList();
-    },[])
 
     return(
         <div className="screen_DiagnosisHistoryPage">

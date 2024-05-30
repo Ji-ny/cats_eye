@@ -63,9 +63,10 @@ const resetTokenAndReattemptRequest = async ( originalRequest ) => { // original
         // 만약, 리프레시 토큰도 만료라면,
         if (retryError?.response?.data?.code === "JWT-401"){
             console.error("재시도 중 리프레시 토큰 만료!", retryError.response.data.code);
-            // todo : redux 로그인 상태를 false로 넣어준다.
+            //todo:  로그인 상태를 false로 넣어준다. (토큰 만료)
             // 로그인으로 이동.
             alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
+            localStorage.clear(); // *로컬스트리지 삭제
             window.location.href = `${window.location.origin}/login`; //http://localhost:3000 자동 지정
         } 
         console.error('재시도 중 오류 발생!', retryError);
@@ -98,7 +99,7 @@ defaultAxios.interceptors.response.use(
             } catch (retryError) {
                 return Promise.reject(retryError); // 재시도 중 에러가 발생하면 프로미스 반환
             }
-        }
+        } 
 
         return Promise.reject(error); //프로미스(Promise) 객체에서 에러를 명시적으로 반환
     }
