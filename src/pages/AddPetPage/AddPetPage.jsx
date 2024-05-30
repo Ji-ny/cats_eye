@@ -7,12 +7,18 @@ import axios from "axios";
 import useNavigates from "../../components/NavBar/useNavigates";
 import FileUpload from "../../components/FileUpload/FileUpload";
 import defaultAxios from "../../apis/defaultAxios";
+import { useSelector } from "react-redux";
 
 
 
 // ! 반려동물 추가 페이지
 function AddPetPage(){
+    // ==== * 전역변수 관리 ====== //
+    // * 전역 변수 받아오기 (로그인 상태)
+    const isLogin = useSelector(state => state.isLogin); // 전역 redux stroe 내의 isLogin을가져온다.
 
+    
+    // ====================== //
     //===== state 선언 =====//
     const [name, setName] = useState(''); // 이름 
     const [age, setAge] = useState(''); // 나이
@@ -101,7 +107,19 @@ function AddPetPage(){
 
     useEffect(()=>{
         console.log('postimg', postImg[0])
-    },[postImg])
+    },[postImg]);
+
+    
+    // *로그인 확인 
+    useEffect(() => {
+        if (isLogin) { //}
+            // 로그인 되어있으면, 아무것도 하지 않는다.
+        } else{
+            alert('로그인이 필요합니다.');
+            goLogin();
+        }
+    },[]);
+
     
     return(
         <div className="screen_AddPetPage">

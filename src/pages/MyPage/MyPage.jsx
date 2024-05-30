@@ -163,10 +163,17 @@ function MyPage(){
     // ** =============== //
 
     // 페이지가 처음 렌더링 됐을떄,
+
+    // ekstnsgl 으로 로그인 되어 있는지 확인을 하자
     useEffect(() => {
-        getAuthInfo(); // 사용자 정보를 받아온다.
-        getPetList(); // 반려동물 데이터를 받아온다.
-    } ,[]);
+        if (isLogin) { // 로그인이 되어 있다면!
+            getAuthInfo(); // 사용자 정보를 받아온다.
+            getPetList(); // 반려동물 데이터를 받아온다.
+        } else{
+            alert('로그인이 필요합니다.');
+            goLogin();
+        }
+    },[]);
  //
 
 

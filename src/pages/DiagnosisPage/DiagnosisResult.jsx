@@ -40,10 +40,15 @@ function DiagnosisResult({setLevel, selectedImgPreview ={testImg} , diagnosisRes
                 </div>
                 <li className="result_li">
                     {/* 정상이면 red, 비장상이면 blue */}
-                    <span>{diagnosisResult.petName}</span>(이)는 <span>{diagnosisResult.result === "NORMAL" ? "정상" : "비정상"}</span>입니다.
+                    <span>{diagnosisResult.petName}</span>(이)는 
+                    <span style={diagnosisResult.result==="NORMAL" ? {color:"blue"} : {color:"red"}}> {diagnosisResult.result === "NORMAL" ? "정상" : "비정상"} </span>
+                    입니다.
                 </li>
                 <li className="result_li">
-                    날짜 :  {diagnosisResult.time}
+                    날짜 :  {new Date(diagnosisResult?.time).toISOString().split('T')[0]}
+                </li>
+                <li className="result_li">
+                    시간 :  {new Date(diagnosisResult?.time).toISOString().split('T')[1].slice(0, 5)}
                 </li>
 
             </div>

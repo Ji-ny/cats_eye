@@ -6,9 +6,22 @@ import { useEffect, useState } from 'react';
 import markerImg from '../../images/marker_img.svg';
 import markerHospitalImg from '../../images/marker_hospital.png';
 import defaultAxios from '../../apis/defaultAxios';
+import { useSelector } from 'react-redux';
+import useNavigates from '../../components/NavBar/useNavigates';
 
 // ! 지도 보여주는 컴포넌트 ! 
+
 function ShowMap(){
+    // * ==== 전역 변수 ====== // 
+    // * 전역 변수 받아오기 (로그인 상태)
+    const isLogin = useSelector(state => state.isLogin); // 전역 redux stroe 내의 isLogin을가져온다.
+    
+    // ====================== //
+
+
+    // 네비게이트 함수
+    const { goDiagnosis, goDiagnosisDB , goLogin} = useNavigates();
+    // *======================= //
     // console.log(navigator.geolocation);
 
     // 기본 위치를 null로 하지 않고, 정해줌으로서 내 위치 제대로 나온다. (이게뭐임?)
@@ -108,11 +121,16 @@ function ShowMap(){
 
 
 // ** 현재 내 위치 주변 마커를 받는 API ** //
-
-useEffect(()=>{
-    getCurrentPos(); // 마커 먼저 위치 받고.      
-    // getNearMarkers();
+// ekstnsgl 으로 로그인 되어 있는지 확인을 하자
+useEffect(() => {
+    if (isLogin) { //}
+        getCurrentPos(); // 마커 먼저 위치 받고.    
+    } else{
+        alert('로그인이 필요합니다.');
+        goLogin();
+    }
 },[]);
+
 
 // 현재 위치를 받는다면, 주위 마커도 받는다.
 useEffect(()=>{

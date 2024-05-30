@@ -27,7 +27,7 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
                 const formData = new FormData();
                 formData.append('petImage', postImg[0] ); 
                 
-                const response = await defaultAxios.post( URL, formData);
+                const response = await defaultAxios.post( url, formData);
 
                 console.log( `/api/v1/diagnosis/upload?petId=${postImg}`, response);
                 setLevel(3); // 레벨을 3으로 올린다. // => 진단결과 페이지로 이동한다. // todo 이 방법도 다시 생각해야함
@@ -37,7 +37,8 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
                 
             }
 
-        }catch{
+        }catch(error){
+            console.error("오류 발생!", error);
 
         }
         // 이미지가 업로드 되어 있지 않다면,

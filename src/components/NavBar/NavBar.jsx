@@ -17,15 +17,19 @@ function NavBar({onClick}){
             <section className="container_NavBar">
                 <div className="item_NavBar" onClick={goChatBotPage}>
                     <img src={chatBot_img} alt="챗봇" />
+                    <div>챗봇</div>
                 </div>
                 <div className="item_NavBar" onClick={goMainPage}>
                     <img src={main_img} alt="메인"   />
+                    <div>메인</div>
                 </div>
                 <div className="item_NavBar" onClick={goMapPage}>
                     <img src={map_img} alt="지도"  />
+                    <div>지도</div>
                 </div>
                 <div className="item_NavBar"  onClick={goMyPage}>
                     <img  src={myPage_img} alt="마이페이지"/>
+                    <div>내 정보</div>
                 </div>
             </section>
 
