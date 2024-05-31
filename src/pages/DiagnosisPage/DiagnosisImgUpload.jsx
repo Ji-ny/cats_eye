@@ -30,16 +30,16 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
 
                 // todo. 나중에 다 주석 풀것.
                 // //* API 요청을 한다. 
-                // const formData = new FormData();
-                // formData.append('petImage', postImg[0] ); 
+                const formData = new FormData();
+                formData.append('petImage', postImg[0] ); 
                 
-                // const response = await defaultAxios.post( url, formData);
+                const response = await defaultAxios.post( url, formData);
 
                 // console.log( `/api/v1/diagnosis/upload?petId=${postImg}`, response);
                 setLevel(3); // 레벨을 3으로 올린다. // => 진단결과 페이지로 이동한다. // todo 이 방법도 다시 생각해야함
                 // preview이미지럴 넘겨주자.
-                // setSelectedImgPreview(previewImg); // *프리뷰 이미지 저장
-                // setDiagnosisResult(response.data.result); // *진단 결과 저장
+                setSelectedImgPreview(previewImg); // *프리뷰 이미지 저장
+                setDiagnosisResult(response.data.result); // *진단 결과 저장
                 
             }
 

@@ -31,8 +31,8 @@ function DiagnosisResult({setLevel, selectedImgPreview ={testImg} , diagnosisRes
 
         <section className="container_DiagnosisResult">
             <LineDiv>
-                <img className="diagnosis_result_img" src={testImg } alt="진단결과 이미지"/>
-                {/* // todo. testImg 나중에 selectedImgPreview로 바꿔줄것. */}
+                <img className="diagnosis_result_img" src={selectedImgPreview } alt="진단결과 이미지"/>
+                
             </LineDiv>
 
             <div className="diagnosis_result_contents">
