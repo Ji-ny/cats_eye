@@ -4,7 +4,7 @@ import "./AddPetPage.scss";
 import cameraImg from "../../images/camera_img.svg";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import useNavigates from "../../components/NavBar/useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 import FileUpload from "../../components/FileUpload/FileUpload";
 import defaultAxios from "../../apis/defaultAxios";
 import { useSelector } from "react-redux";

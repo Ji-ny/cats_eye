@@ -5,7 +5,7 @@ import diagnosis_db_img from "../../images/diagnosis_db_img.svg"
 
 import "./MainPage.scss";
 import NavBar from "../../components/NavBar/NavBar";
-import useNavigates from "../../components/NavBar/useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";

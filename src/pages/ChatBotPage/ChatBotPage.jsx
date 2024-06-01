@@ -6,7 +6,7 @@ import send_img from "../../images/send_img.svg";
 import { DefaultBlutButton, TitleDefault } from "../../styles/styles_custom";
 import defaultAxios from "../../apis/defaultAxios";
 import { useSelector } from "react-redux";
-import useNavigates from "../../components/NavBar/useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 import Swal from "sweetalert2";
 
 // ! 챗봇상담 페이지

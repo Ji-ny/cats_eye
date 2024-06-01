@@ -7,7 +7,7 @@ import markerImg from '../../images/marker_img.svg';
 import markerHospitalImg from '../../images/marker_hospital.png';
 import defaultAxios from '../../apis/defaultAxios';
 import { useSelector } from 'react-redux';
-import useNavigates from '../../components/NavBar/useNavigates';
+import useNavigates from "../../hooks/useNavigates";
 import Swal from 'sweetalert2';
 
 // ! 지도 보여주는 컴포넌트 ! 
