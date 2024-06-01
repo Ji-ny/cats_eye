@@ -4,7 +4,7 @@ import map_img from "../../images/map_img.svg"
 import main_img from "../../images/main_img.svg"
 import myPage_img from "../../images/myPage_img.svg"
 import { useNavigate } from "react-router-dom";
-import useNavigates from "./useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 
 
 // ! 네비바. 

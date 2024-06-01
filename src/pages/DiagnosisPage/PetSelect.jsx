@@ -4,8 +4,8 @@ import catPadImg from '../../images/catPad_img.svg';
 import "./PetSelect.scss";
 import NavBar from "../../components/NavBar/NavBar";
 import testImg from "../../images/puppy.svg";
-import PetComponent from "../../components/NavBar/PetComponent";
-import useNavigates from "../../components/NavBar/useNavigates";
+import PetComponent from "../../components/PetComponent/PetComponent";
+import useNavigates from "../../hooks/useNavigates";
 import defaultAxios from "../../apis/defaultAxios";
 import { useEffect, useState } from "react";
 

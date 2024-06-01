@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import defaultAxios from "../../apis/defaultAxios";
 
 import { useSelector } from "react-redux";
-import useNavigates from "../../components/NavBar/useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 import Swal from "sweetalert2";
 
 function DiagnosisHistoryPage(){

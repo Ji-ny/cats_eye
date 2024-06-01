@@ -30,7 +30,7 @@ function Login(){
         <div className= "screen_Login">
             
             <TitlePink> Cat's eye </TitlePink>
-            <div className='subtitle_Login'> 고양이 눈 건강 진료 / 챗봇 서비스</div>
+            <div className='subtitle_Login'> 고양이 결막염 진단/챗봇 서비스</div>
             {/* 로그인 페이지로 이동한다. */}
             <div style={{flex:0.4}}>
                 {/* <div style={{width:'100%', height:'100%'}}><img style={{width:'100%', height:'100%'}} src={catImg} alt=''/></div> */}

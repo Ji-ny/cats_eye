@@ -3,7 +3,7 @@ import testImg from "../../images/testingImages/youbu_test5.jpg"; // 테스트 �
 import "./DiagnosisResult.scss";
 import { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
-import useNavigates from "../../components/NavBar/useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 
 // ! 진단 결과 페이지
 // 레벨. 선택된 이미지, 진단결과

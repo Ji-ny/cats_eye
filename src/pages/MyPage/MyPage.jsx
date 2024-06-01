@@ -1,11 +1,11 @@
 import "./MyPage.scss";
 // ! MyPage 마이페이지 
 import testImg from "../../images/puppy.svg";
-import PetComponent from "../../components/NavBar/PetComponent";
+import PetComponent from "../../components/PetComponent/PetComponent";
 import { DefaultBlutButton, StyledHr, TitleDefault } from "../../styles/styles_custom";
 import NavBar from "../../components/NavBar/NavBar";
 import { useNavigate } from "react-router-dom";
-import useNavigates from "../../components/NavBar/useNavigates";
+import useNavigates from "../../hooks/useNavigates";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLogin } from "../../store/store";
