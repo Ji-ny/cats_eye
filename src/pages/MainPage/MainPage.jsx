@@ -24,7 +24,7 @@ function MainPage(){
 
 
     // 네비게이트 함수
-    const { goDiagnosis, goDiagnosisDB , goLogin} = useNavigates();
+    const { goDiagnosis, goDiagnosisDB , goLogin, goMainPage} = useNavigates();
 
     // 로그인 여부 저장 함수
     // const [isLogin, setIsLogin] = useState(false); // true : 로그인됨, false: 로그인 안됨
@@ -45,6 +45,7 @@ function MainPage(){
 
                 // 클릭 이벤트 발생 시 Redux store에서 setIsLogin 액션을 dispatch하여 상태를 true로 변경합니다.
                 dispatch(setIsLogin(true)); // 로그인 상태로 변경
+                
                 // console.log('토큰 저장후 로그인 상태', isLogin, );
             } else {
                 // 로그인 되어 있지 않다면, 로그인 화면으로 이동.
@@ -53,6 +54,12 @@ function MainPage(){
             }
         }
     }, []);
+
+    useEffect(()=>{
+        if (isLogin === true){
+            goMainPage(); // 메인 페이지로 이동
+        }
+    }, [isLogin,goMainPage]); // goMainPage를 넣는 이유는, goMainPage가 변할수도 있기 때문이다. 의존성 배열을 넣어주는 것
 
 
     
