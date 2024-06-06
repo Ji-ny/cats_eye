@@ -18,6 +18,7 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
     // *모달 * //
 
     // 모달 (* 로딩중 !)
+    
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalContent, setModalContent] = useState('진단중입니다...');
     const openModal = (content) => {
@@ -61,7 +62,7 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
                 // *로딩 종료
                 closeModal();
 
-                // console.log( `/api/v1/diagnosis/upload?petId=${postImg}`, response);
+                console.log( `/api/v1/diagnosis/upload?petId=${postImg}`, response);
                 setLevel(3); // 레벨을 3으로 올린다. // => 진단결과 페이지로 이동한다. // todo 이 방법도 다시 생각해야함
                 // preview이미지럴 넘겨주자.
                 setSelectedImgPreview(previewImg); // *프리뷰 이미지 저장
@@ -70,7 +71,13 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
             }
 
         }catch(error){
-            openModal('다시 진단해주세요.');
+            console.error('진단에러',error);
+            // 에러 발생시,
+            closeModal();
+            Swal.fire({
+                icon: 'warning',
+                text: '다시 진단해주세요.',
+                });
             console.error("오류 발생!", error);
 
         }
