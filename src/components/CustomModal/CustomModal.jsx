@@ -82,3 +82,19 @@ function CustomModal({content="모달이에요", modalIsOpen, close} ){
 }
 
 export default CustomModal;
+
+// const [modalContent, setModalContent] = useState('');
+// const [modalIsOpen, setModalIsOpen] = useState(false);
+
+// const openModal = (content) => {
+//     setModalContent(content); //   모달 컨텐츠
+//     setModalIsOpen(true);
+
+//     return true;
+// };
+
+
+// // 모달 닫기
+// const closeModal = ()=>{
+//     setModalIsOpen(false);
+// }

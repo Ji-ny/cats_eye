@@ -7,12 +7,32 @@ import "./DiagnosisImgUpload.scss";
 import NavBar from "../../components/NavBar/NavBar";
 import defaultAxios from "../../apis/defaultAxios";
 import Swal from "sweetalert2";
+import CustomModal from "../../components/CustomModal/CustomModal";
 
 function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDiagnosisResult }){ // 레벨, 이미지 프리뷰선택된 펫정보, 저장할 정상유뮤()
 
     const [postImg, setPostImg] = useState([]); // 서버로 전송할 img
     const [previewImg, setPreviewImg] = useState([]) // 선택된 미리보기 img
 
+
+    // *모달 * //
+
+    // 모달 (* 로딩중 !)
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalContent, setModalContent] = useState('진단중입니다...');
+    const openModal = (content) => {
+        setModalContent(content);
+        setModalIsOpen(true);
+    };
+
+
+    // 모달 닫기
+    const closeModal = ()=>{
+        setModalIsOpen(false);
+    }
+
+    
+    // * //
 
     // * [진단하기] 버튼 클릭시, 서버로 진단 부위 이미지 전송 
     const handleDiagnosis = async () =>{
@@ -28,12 +48,18 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
 
                 const url = `/api/v1/diagnosis/upload?petId=${selectedPet.perId}`; // petId를 쿼리스트링으로 넘겨줌
 
+                // *로딩 시작
+                openModal('진단중입니다...');
+
                 // todo. 나중에 다 주석 풀것.
                 // //* API 요청을 한다. 
                 const formData = new FormData();
                 formData.append('petImage', postImg[0] ); 
                 
                 const response = await defaultAxios.post( url, formData);
+
+                // *로딩 종료
+                closeModal();
 
                 // console.log( `/api/v1/diagnosis/upload?petId=${postImg}`, response);
                 setLevel(3); // 레벨을 3으로 올린다. // => 진단결과 페이지로 이동한다. // todo 이 방법도 다시 생각해야함
@@ -44,6 +70,7 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
             }
 
         }catch(error){
+            openModal('다시 진단해주세요.');
             console.error("오류 발생!", error);
 
         }
@@ -54,7 +81,7 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
     return(
 
         <div className="screen_DiagnosisImgUpload">
-
+            <CustomModal content="진단 중입니다..." modalIsOpen={modalIsOpen} close={closeModal}/>
             <TitleDefault>진단하기</TitleDefault>
             <SubTitleDefault>진단할 부위의 사진을 업로드해주세요.</SubTitleDefault>
 
@@ -63,7 +90,9 @@ function DiagnosisImgUpload({setLevel, setSelectedImgPreview, selectedPet, setDi
                 <FileUpload postImg = {postImg}  setPostImg = {setPostImg} previewImg={previewImg} setPreviewImg={setPreviewImg} />
                 
                 {/* 0.9 flex로 빈자리를 채워준다. */}
-                <div style={{ flex:"0.9"}}></div>
+                <div style={{ flex:"0.9"}}>
+                
+                </div>
                 
                 <DefaultBlutButton onClick={handleDiagnosis} > 진단하기</DefaultBlutButton>
             </section>
