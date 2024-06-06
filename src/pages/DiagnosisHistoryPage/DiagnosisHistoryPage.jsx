@@ -34,16 +34,10 @@ function DiagnosisHistoryPage(){
 
     // ** 내 반려동물 진단 내역 조회--------- //
     const getDiagnosisHistoryList = async () => {
-        const URL = `/api/v1/diagnosis/search`;
-        // const headers = {"Authorization" : `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`}; // 헤더 토큰 
-        
+        const URL = `/api/v1/diagnosis/search`;       
         try{
             const response = await defaultAxios.get( URL);
-            // console.log('성공 /api/v1/diagnosis/search response : ', response);
-
-            // userInfo 업데이트
             setDiagnosisHistoryList(response.data.result);
-            // console.log(userInfo);
         }    
         catch(error){
             if (error.response.data.code === "4020"){
@@ -53,12 +47,10 @@ function DiagnosisHistoryPage(){
                     text: "진단내역이 없습니다.",
                     icon: "info"
                 });
-                
             }
             else {
                 console.error("오류 발생!", error);
             }
-            // console.log(error.response);
         }
 
     }
@@ -91,7 +83,7 @@ function DiagnosisHistoryPage(){
                         <div>
                             <div>날짜 : {value?.day}</div>
                             <div>이름 : {value?.name}</div>
-                            <div>검사결과 : {value?.diagnosisResult}</div>
+                            <div>검사결과 : {value?.diagnosisResult === "NORMAL" ? "정상" : "비정상"}</div>
                         </div>
                     </section>
                 ))}
